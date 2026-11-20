@@ -3,20 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trip Planner - All India</title>
+<title>Trip Planner - Full Budget</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#FFF7ED;color:#333;padding:15px}
-h1{text-align:center;color:#EA580C;font-size:28px;margin:10px 0}
+h1{text-align:center;color:#EA580C;font-size:26px;margin:10px 0}
 p.sub{text-align:center;color:#666;margin-bottom:15px}
 .box{background:#fff;padding:18px;border-radius:15px;max-width:650px;margin:15px auto;box-shadow:0 2px 10px #ddd}
-h2{color:#EA580C;margin-bottom:12px;font-size:20px}
-label{font-weight:bold;display:block;margin:12px 0 5px}
+h2{color:#EA580C;margin-bottom:12px;font-size:19px}
+label{font-weight:bold;display:block;margin:12px 0 5px;font-size:14px}
 select,input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;font-size:15px}
 button{width:100%;background:#EA580C;color:#fff;border:none;padding:13px;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:15px}
 button:hover{background:#C2410C}
-.row{display:flex;gap:10px}
-.row>div{flex:1}
+.row{display:flex;gap:10px}.row>div{flex:1}
 .card{background:#FFF7ED;padding:12px;border-radius:10px;margin-top:10px;border:1px solid #FED7AA}
 .card b{color:#EA580C}
 #result{display:none}
@@ -25,23 +24,33 @@ button:hover{background:#C2410C}
 .place.active{border-color:#EA580C;background:#FFF7ED}
 .place span{font-size:22px;display:block}
 .small{font-size:11px;color:#666}
-.total{font-size:22px;color:#EA580C;text-align:center;font-weight:bold;margin-top:10px}
+.total{font-size:22px;color:#EA580C;text-align:center;font-weight:bold;margin-top:12px}
 .tip{background:#FEF3C7;padding:12px;border-radius:10px;margin-top:12px;font-size:14px}
-.footer{text-align:center;margin:25px 0;font-weight:bold;color:#555}
-.footer span{color:#EA580C}
+.footer{text-align:center;margin:25px 0;font-weight:bold;color:#555}.footer span{color:#EA580C}
 .filter-btn{background:#fff;color:#EA580C;border:1px solid #EA580C;padding:8px 12px;border-radius:20px;font-size:13px;cursor:pointer;margin:3px;width:auto}
 .filter-btn.active{background:#EA580C;color:#fff}
+table{width:100%;border-collapse:collapse;margin-top:10px;font-size:14px}
+td,th{padding:10px;border-bottom:1px solid #eee;text-align:left}
+th{background:#FFF7ED;color:#EA580C}
+td:last-child,th:last-child{text-align:right}
+.bar{height:14px;border-radius:10px;background:#eee;margin:4px 0;overflow:hidden}
+.bar-fill{height:100%;background:#EA580C}
+.badge{display:inline-block;background:#DCFCE7;color:#166534;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}
 </style>
 </head>
 <body>
 
 <h1>✈️ All India Trip Planner 🇮🇳</h1>
-<p class="sub">Kashmir nunchi Kanyakumari varaku - Anni Places!</p>
+<p class="sub">Details Ivu - Full Budget Chupistha!</p>
 
 <div class="box">
-<h2>1. State / Region Select Chey</h2>
+<h2>1. Ekkada Nunchi? Ekkadiki?</h2>
+<label>Neeku Ekkada Nunchi? (Starting Place)</label>
+<input type="text" id="fromPlace" placeholder="Ex: Anantapur, Hyderabad, Vizag..." value="Anantapur">
+
+<label>Region Select Chey</label>
 <div style="text-align:center">
-<button class="filter-btn active" onclick="filterPlaces('all',this)">All India</button>
+<button class="filter-btn active" onclick="filterPlaces('all',this)">All</button>
 <button class="filter-btn" onclick="filterPlaces('south',this)">South</button>
 <button class="filter-btn" onclick="filterPlaces('north',this)">North</button>
 <button class="filter-btn" onclick="filterPlaces('west',this)">West</button>
@@ -49,184 +58,232 @@ button:hover{background:#C2410C}
 <button class="filter-btn" onclick="filterPlaces('northeast',this)">North-East</button>
 </div>
 
-<h2 style="margin-top:15px">2. Place Select Chey</h2>
+<label style="margin-top:12px">Place Select Chey</label>
 <div class="place-grid" id="places"></div>
 
-<label>Enni Rojulu?</label>
-<select id="days">
-<option value="1">1 Roju</option>
-<option value="2" selected>2 Rojulu</option>
-<option value="3">3 Rojulu</option>
-<option value="4">4 Rojulu</option>
-<option value="5">5 Rojulu</option>
-<option value="7">7 Rojulu</option>
-</select>
-
 <div class="row">
-<div>
-<label>Entha Mandi?</label>
-<input type="number" id="people" value="2" min="1" max="30">
-</div>
-<div>
-<label>Budget Per Person / Roju?</label>
-<select id="budgetType">
-<option value="1000">Low - Rs.1000</option>
-<option value="2000" selected>Medium - Rs.2000</option>
-<option value="4000">High - Rs.4000</option>
-<option value="7000">Luxury - Rs.7000</option>
-</select>
-</div>
+<div><label>Enni Rojulu?</label>
+<select id="days"><option value="1">1 Roju</option><option value="2" selected>2 Rojulu</option><option value="3">3 Rojulu</option><option value="4">4 Rojulu</option><option value="5">5 Rojulu</option><option value="7">7 Rojulu</option></select></div>
+<div><label>Entha Mandi?</label><input type="number" id="people" value="2" min="1" max="30"></div>
 </div>
 
-<button onclick="makePlan()">Plan Chupinchu ➡️</button>
+<h2 style="margin-top:18px">2. Travel Details</h2>
+<label>Travel Ela? (Up & Down)</label>
+<select id="travelMode" onchange="updateTravelPrice()">
+<option value="train_sleeper">🚂 Train - Sleeper</option>
+<option value="train_ac">🚂 Train - AC 3rd</option>
+<option value="bus">🚌 Bus - Sleeper</option>
+<option value="flight">✈️ Flight</option>
+<option value="bike">🏍️ Bike / Car - Petrol</option>
+</select>
+
+<label>Ticket Price - 1 Person - One Side (Rs.) - Nee Istam Marchuko</label>
+<input type="number" id="ticketPrice" value="500" min="0">
+
+<label>Room - 1 Night Ki Entha? (Rs.)</label>
+<select id="roomType" onchange="updateRoomPrice()">
+<option value="800">Budget Room - Rs.800 / Night</option>
+<option value="1500" selected>Medium Room - Rs.1500 / Night</option>
+<option value="3000">Good Hotel - Rs.3000 / Night</option>
+<option value="5000">Luxury - Rs.5000 / Night</option>
+</select>
+
+<label>Food - 1 Person - 1 Roju Ki Entha?</label>
+<select id="foodPrice">
+<option value="300">Low - Rs.300 (Street Food)</option>
+<option value="600" selected>Medium - Rs.600</option>
+<option value="1000">Good - Rs.1000</option>
+<option value="1500">Luxury - Rs.1500</option>
+</select>
+
+<label>Local Travel - Auto / Cab / Scooty - 1 Roju Ki?</label>
+<input type="number" id="localPrice" value="500" min="0">
+
+<label>Activities / Entry Tickets / Shopping - Total?</label>
+<input type="number" id="extraPrice" value="1000" min="0">
+
+<button onclick="makePlan()">Full Budget Chupinchu ➡️</button>
 </div>
 
 <div class="box" id="result">
-<h2>📋 Nee Trip Plan</h2>
-<div id="planText"></div>
-<div class="total" id="totalText"></div>
-<div class="tip" id="tipText"></div>
-<button onclick="savePlan()">Plan Save Chesuko ❤️</button>
-<p id="savedMsg" style="text-align:center;color:green;margin-top:10px"></p>
-</div>
+<h2>📋 <span id="tripTitle"></span></h2>
+<p id="tripMeta"></p>
+<span class="badge" id="budgetBadge"></span>
 
-<div class="box">
-<h2>🧳 Packing List</h2>
-<div id="packing"></div>
+<h2 style="margin-top:15px">💰 Budget Breakdown</h2>
+<table>
+<tr><th>Item</th><th>Calculation</th><th>Amount</th></tr>
+<tr><td>🎟️ Tickets<br><small id="t1"></small></td><td id="t2"></td><td id="t3"></td></tr>
+<tr><td>🏨 Room<br><small id="r1"></small></td><td id="r2"></td><td id="r3"></td></tr>
+<tr><td>🍔 Food<br><small id="f1"></small></td><td id="f2"></td><td id="f3"></td></tr>
+<tr><td>🛺 Local Travel</td><td id="l2"></td><td id="l3"></td></tr>
+<tr><td>🎡 Activities / Shopping</td><td>One Time</td><td id="e3"></td></tr>
+<tr><td>🧳 Miscellaneous (10%)<br><small>Emergency, Water, Tips</small></td><td>10% of Total</td><td id="m3"></td></tr>
+</table>
+
+<div class="total" id="totalText"></div>
+<div style="text-align:center;margin-top:8px" id="perPerson"></div>
+
+<h2 style="margin-top:15px">📊 Ekkada Ekkuva Kharcu?</h2>
+<div id="bars"></div>
+
+<h2 style="margin-top:15px">🗓️ Day-wise Plan</h2>
+<div id="planText"></div>
+
+<div class="tip" id="tipText"></div>
+
+<h2 style="margin-top:15px">💡 Money Save Tips</h2>
+<div id="saveTips"></div>
+
+<button onclick="sharePlan()">WhatsApp lo Share Chey 💬</button>
+<button onclick="savePlan()" style="background:#16A34A">Plan Save Chesuko ❤️</button>
+<p id="savedMsg" style="text-align:center;color:green;margin-top:10px"></p>
 </div>
 
 <p class="footer">Made with ❤️ by <span>Muthyala Rakesh</span> 🇮🇳</p>
 
 <script>
 let allPlaces = [
-{ n:"Tirupati", e:"🛕", c:"south", s:"AP" },
-{ n:"Vizag", e:"🏖️", c:"south", s:"AP" },
-{ n:"Araku", e:"⛰️", c:"south", s:"AP" },
-{ n:"Hyderabad", e:"🏙️", c:"south", s:"Telangana" },
-{ n:"Warangal", e:"🛕", c:"south", s:"Telangana" },
-{ n:"Ooty", e:"🌿", c:"south", s:"Tamil Nadu" },
-{ n:"Madurai", e:"🛕", c:"south", s:"Tamil Nadu" },
-{ n:"Chennai", e:"🏖️", c:"south", s:"Tamil Nadu" },
-{ n:"Pondicherry", e:"🌊", c:"south", s:"Pondicherry" },
-{ n:"Mysore", e:"👑", c:"south", s:"Karnataka" },
-{ n:"Coorg", e:"☕", c:"south", s:"Karnataka" },
-{ n:"Bangalore", e:"🏙️", c:"south", s:"Karnataka" },
-{ n:"Kerala - Munnar", e:"🌿", c:"south", s:"Kerala" },
-{ n:"Kochi", e:"🚢", c:"south", s:"Kerala" },
-{ n:"Alleppey", e:"🛶", c:"south", s:"Kerala" },
-{ n:"Kanyakumari", e:"🌅", c:"south", s:"Tamil Nadu" },
-{ n:"Delhi", e:"🏛️", c:"north", s:"Delhi" },
-{ n:"Agra - Taj Mahal", e:"🕌", c:"north", s:"UP" },
-{ n:"Jaipur", e:"👑", c:"north", s:"Rajasthan" },
-{ n:"Udaipur", e:"🏰", c:"north", s:"Rajasthan" },
-{ n:"Jodhpur", e:"💙", c:"north", s:"Rajasthan" },
-{ n:"Manali", e:"❄️", c:"north", s:"Himachal" },
-{ n:"Shimla", e:"🏔️", c:"north", s:"Himachal" },
-{ n:"Kashmir", e:"🌸", c:"north", s:"J&K" },
-{ n:"Leh Ladakh", e:"🏔️", c:"north", s:"Ladakh" },
-{ n:"Varanasi", e:"🛕", c:"north", s:"UP" },
-{ n:"Rishikesh", e:"🧘", c:"north", s:"Uttarakhand" },
-{ n:"Haridwar", e:"🛕", c:"north", s:"Uttarakhand" },
-{ n:"Amritsar", e:"🙏", c:"north", s:"Punjab" },
-{ n:"Mumbai", e:"🌆", c:"west", s:"Maharashtra" },
-{ n:"Pune", e:"🏙️", c:"west", s:"Maharashtra" },
-{ n:"Goa", e:"🌊", c:"west", s:"Goa" },
-{ n:"Mahabaleshwar", e:"🍓", c:"west", s:"Maharashtra" },
-{ n:"Ahmedabad", e:"🏙️", c:"west", s:"Gujarat" },
-{ n:"Rann of Kutch", e:"🏜️", c:"west", s:"Gujarat" },
-{ n:"Kolkata", e:"🌉", c:"east", s:"West Bengal" },
-{ n:"Darjeeling", e:"🍵", c:"east", s:"West Bengal" },
-{ n:"Puri", e:"🛕", c:"east", s:"Odisha" },
-{ n:"Bhubaneswar", e:"🛕", c:"east", s:"Odisha" },
-{ n:"Andaman", e:"🏝️", c:"east", s:"Andaman" },
-{ n:"Shillong", e:"🌧️", c:"northeast", s:"Meghalaya" },
-{ n:"Guwahati", e:"🛕", c:"northeast", s:"Assam" },
-{ n:"Gangtok", e:"🏔️", c:"northeast", s:"Sikkim" },
-{ n:"Tawang", e:"🏔️", c:"northeast", s:"Arunachal" },
-{ n:"Imphal", e:"🌿", c:"northeast", s:"Manipur" }
+{ n:"Tirupati", e:"🛕", c:"south" },{ n:"Vizag", e:"🏖️", c:"south" },{ n:"Araku", e:"⛰️", c:"south" },
+{ n:"Hyderabad", e:"🏙️", c:"south" },{ n:"Ooty", e:"🌿", c:"south" },{ n:"Madurai", e:"🛕", c:"south" },
+{ n:"Chennai", e:"🏖️", c:"south" },{ n:"Pondicherry", e:"🌊", c:"south" },{ n:"Mysore", e:"👑", c:"south" },
+{ n:"Coorg", e:"☕", c:"south" },{ n:"Bangalore", e:"🏙️", c:"south" },{ n:"Kerala - Munnar", e:"🌿", c:"south" },
+{ n:"Kochi", e:"🚢", c:"south" },{ n:"Alleppey", e:"🛶", c:"south" },{ n:"Kanyakumari", e:"🌅", c:"south" },
+{ n:"Delhi", e:"🏛️", c:"north" },{ n:"Agra - Taj Mahal", e:"🕌", c:"north" },{ n:"Jaipur", e:"👑", c:"north" },
+{ n:"Udaipur", e:"🏰", c:"north" },{ n:"Manali", e:"❄️", c:"north" },{ n:"Shimla", e:"🏔️", c:"north" },
+{ n:"Kashmir", e:"🌸", c:"north" },{ n:"Leh Ladakh", e:"🏔️", c:"north" },{ n:"Varanasi", e:"🛕", c:"north" },
+{ n:"Rishikesh", e:"🧘", c:"north" },{ n:"Amritsar", e:"🙏", c:"north" },
+{ n:"Mumbai", e:"🌆", c:"west" },{ n:"Pune", e:"🏙️", c:"west" },{ n:"Goa", e:"🌊", c:"west" },
+{ n:"Ahmedabad", e:"🏙️", c:"west" },{ n:"Rann of Kutch", e:"🏜️", c:"west" },
+{ n:"Kolkata", e:"🌉", c:"east" },{ n:"Darjeeling", e:"🍵", c:"east" },{ n:"Puri", e:"🛕", c:"east" },
+{ n:"Andaman", e:"🏝️", c:"east" },{ n:"Shillong", e:"🌧️", c:"northeast" },{ n:"Guwahati", e:"🛕", c:"northeast" },
+{ n:"Gangtok", e:"🏔️", c:"northeast" },{ n:"Tawang", e:"🏔️", c:"northeast" }
 ];
-
 let selected = "Vizag";
 let currentFilter = "all";
+let lastTotal = 0, lastBreak = {};
 
 function renderPlaces(){
-  let box = document.getElementById('places');
-  box.innerHTML = "";
+  let box = document.getElementById('places'); box.innerHTML = "";
   let list = allPlaces.filter(p => currentFilter==="all" || p.c===currentFilter);
   list.forEach(p=>{
     let div = document.createElement('div');
     div.className = 'place' + (p.n===selected ? ' active' : '');
-    div.innerHTML = '<span>'+p.e+'</span><b>'+p.n+'</b><div class="small">'+p.s+'</div>';
-    div.onclick = function(){ selectPlace(p.n); };
+    div.innerHTML = '<span>'+p.e+'</span><b>'+p.n+'</b>';
+    div.onclick = function(){ selected = p.n; renderPlaces(); };
     box.appendChild(div);
   });
 }
 function filterPlaces(cat, btn){
   currentFilter = cat;
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderPlaces();
+  btn.classList.add('active'); renderPlaces();
 }
-function selectPlace(name){
-  selected = name;
-  renderPlaces();
-  updatePacking();
+function updateTravelPrice(){
+  let m = document.getElementById('travelMode').value;
+  let map = {train_sleeper:500, train_ac:1200, bus:800, flight:3500, bike:1000};
+  document.getElementById('ticketPrice').value = map[m];
+}
+function updateRoomPrice(){
+  // room price already from select, no extra
 }
 
 let plans = {
-"Vizag": ["Day 1: RK Beach - Kailasagiri - Submarine Museum","Day 2: Araku Train / Borra Caves","Day 3: Yarada Beach - Rushikonda - Shopping","Day 4: Simhachalam - Zoo Park","Day 5: Beach Sunrise - Return","Day 6: Extra Beach Day","Day 7: Shopping - Return"],
-"Tirupati": ["Day 1: Tirumala Darshan - Padmavathi Temple","Day 2: Kapila Theertham - Shopping","Day 3: Sri Kalahasti - Return","Day 4: Papavinasanam - Relax","Day 5: Extra Darshan","Day 6: Local Temples","Day 7: Return"],
-"Goa": ["Day 1: Baga Beach - Calangute","Day 2: North Goa - Fort Aguada - Water Sports","Day 3: South Goa - Palolem - Churches","Day 4: Cruise - Casino - Night Market","Day 5: Beach Sunrise - Return","Day 6: Dudhsagar Falls","Day 7: Shopping - Return"],
-"Delhi": ["Day 1: India Gate - Red Fort - Connaught Place","Day 2: Qutub Minar - Lotus Temple - Humayun Tomb","Day 3: Akshardham - Chandni Chowk Food","Day 4: Delhi Shopping - Sarojini Nagar","Day 5: Agra Day Trip - Taj Mahal","Day 6: Gurgaon - Cyber Hub","Day 7: Return"],
-"Agra - Taj Mahal": ["Day 1: Taj Mahal Sunrise - Agra Fort","Day 2: Mehtab Bagh - Local Food","Day 3: Fatehpur Sikri - Return","Day 4: Delhi Day Trip","Day 5: Shopping - Return","Day 6: Yamuna View - Relax","Day 7: Return"],
-"Jaipur": ["Day 1: Hawa Mahal - City Palace","Day 2: Amber Fort - Jaigarh - Nahargarh","Day 3: Jantar Mantar - Shopping - Bapu Bazaar","Day 4: Jal Mahal - Birla Temple","Day 5: Chokhi Dhani - Return","Day 6: Ajmer - Pushkar Trip","Day 7: Return"],
-"Manali": ["Day 1: Mall Road - Hadimba Temple","Day 2: Solang Valley - Paragliding","Day 3: Rohtang Pass - Snow Point","Day 4: Old Manali - Cafe Hopping","Day 5: Kullu - River Rafting","Day 6: Jogini Falls - Trek","Day 7: Return"],
-"Kashmir": ["Day 1: Srinagar - Dal Lake Shikara Ride","Day 2: Gulmarg - Snow Activities","Day 3: Pahalgam - Betaab Valley","Day 4: Sonmarg - Thajiwas Glacier","Day 5: Srinagar Shopping - Lal Chowk","Day 6: Doodhpathri","Day 7: Return"],
-"Leh Ladakh": ["Day 1: Leh Arrival - Rest - Leh Market","Day 2: Pangong Lake","Day 3: Nubra Valley - Khardung La","Day 4: Magnetic Hill - Gurudwara","Day 5: Tso Moriri Lake","Day 6: Leh Palace - Shanti Stupa","Day 7: Return"],
-"Mumbai": ["Day 1: Gateway of India - Marine Drive","Day 2: Juhu Beach - Bandra - Bandstand","Day 3: Elephanta Caves - Ferry","Day 4: Shopping - Linking Road - Street Food","Day 5: Film City Tour","Day 6: Lonavala Day Trip","Day 7: Return"],
-"Kerala - Munnar": ["Day 1: Tea Gardens - Mattupetty Dam","Day 2: Eravikulam National Park - Top Station","Day 3: Tea Museum - Blossom Park","Day 4: Thekkady - Spice Plantation","Day 5: Alleppey Houseboat","Day 6: Kochi - Fort Kochi","Day 7: Return"],
-"Kolkata": ["Day 1: Howrah Bridge - Victoria Memorial","Day 2: Dakshineswar - Belur Math","Day 3: Park Street Food - Shopping","Day 4: Eco Park - Science City","Day 5: Darjeeling Day Trip Plan","Day 6: Local Street Food Tour","Day 7: Return"],
-"Darjeeling": ["Day 1: Toy Train - Mall Road","Day 2: Tiger Hill Sunrise - Batasia Loop","Day 3: Tea Gardens - Peace Pagoda","Day 4: Rock Garden - Zoo","Day 5: Kalimpong Trip","Day 6: Local Shopping","Day 7: Return"],
-"Varanasi": ["Day 1: Ganga Aarti - Dashashwamedh Ghat","Day 2: Kashi Vishwanath Temple - Boat Ride","Day 3: Sarnath - Buddhist Temples","Day 4: Banarasi Food - Shopping","Day 5: Allahabad Trip","Day 6: Morning Boat - Temples","Day 7: Return"],
-"Shillong": ["Day 1: Shillong City - Ward's Lake","Day 2: Cherrapunji - Living Root Bridge","Day 3: Dawki - Umngot River - Mawlynnong","Day 4: Elephant Falls - Shillong Peak","Day 5: Laitlum Canyons","Day 6: Local Cafe - Shopping","Day 7: Return"],
-"Andaman": ["Day 1: Port Blair - Cellular Jail","Day 2: Havelock - Radhanagar Beach","Day 3: Scuba Diving - Snorkeling","Day 4: Neil Island - Natural Bridge","Day 5: Ross Island - North Bay","Day 6: Beach Relax","Day 7: Return"]
+"Vizag": ["RK Beach - Kailasagiri - Submarine Museum","Araku Train / Borra Caves","Yarada Beach - Rushikonda - Shopping","Simhachalam - Zoo Park","Beach Sunrise - Return","Extra Beach Day","Shopping - Return"],
+"Goa": ["Baga Beach - Calangute","North Goa - Fort Aguada - Water Sports","South Goa - Palolem - Churches","Cruise - Casino - Night Market","Beach Sunrise - Return","Dudhsagar Falls","Shopping - Return"],
+"Delhi": ["India Gate - Red Fort - CP","Qutub Minar - Lotus Temple","Akshardham - Chandni Chowk Food","Shopping - Sarojini Nagar","Agra Day Trip - Taj Mahal","Cyber Hub","Return"],
+"Manali": ["Mall Road - Hadimba Temple","Solang Valley - Paragliding","Rohtang Pass - Snow Point","Old Manali - Cafe","Kullu - River Rafting","Jogini Falls - Trek","Return"],
+"Kashmir": ["Srinagar - Dal Lake Shikara","Gulmarg - Snow","Pahalgam - Betaab Valley","Sonmarg - Glacier","Srinagar Shopping","Doodhpathri","Return"],
+"Mumbai": ["Gateway - Marine Drive","Juhu - Bandra","Elephanta Caves","Shopping - Linking Road","Film City","Lonavala Trip","Return"]
 };
-
 function getPlan(place, day){
   if(plans[place] && plans[place][day]) return plans[place][day];
-  return "Day "+(day+1)+": "+place+" Local Sightseeing - Food - Shopping - Relax";
+  return place + " Local Sightseeing - Food - Shopping - Relax";
 }
 
+function fmt(n){ return "Rs." + n.toLocaleString('en-IN'); }
+
 function makePlan(){
+  let from = document.getElementById('fromPlace').value || "Nee Place";
   let days = parseInt(document.getElementById('days').value);
-  let people = parseInt(document.getElementById('people').value);
-  let perDay = parseInt(document.getElementById('budgetType').value);
-  if(!people || people < 1){ alert("Entha mandi ani cheppu"); return; }
-  let total = days * people * perDay;
-  let html = "<p><b>Place:</b> " + selected + " | <b>Rojulu:</b> " + days + " | <b>Mandhi:</b> " + people + "</p>";
-  for(let i=0;i<days;i++){
-    html += '<div class="card"><b>'+getPlan(selected,i)+'</b></div>';
-  }
-  document.getElementById('planText').innerHTML = html;
-  document.getElementById('totalText').innerText = "Total Budget: Rs." + total.toLocaleString('en-IN');
-  document.getElementById('tipText').innerText = "💡 Tip: " + selected + " ki velle mundhu train / flight tickets munduga book chesuko. ID proof, cash + UPI marchipoku. Made by Muthyala Rakesh!";
+  let people = parseInt(document.getElementById('people').value) || 1;
+  let ticketOne = parseInt(document.getElementById('ticketPrice').value) || 0;
+  let roomPerNight = parseInt(document.getElementById('roomType').value) || 0;
+  let foodPerDay = parseInt(document.getElementById('foodPrice').value) || 0;
+  let localPerDay = parseInt(document.getElementById('localPrice').value) || 0;
+  let extra = parseInt(document.getElementById('extraPrice').value) || 0;
+  let modeText = document.getElementById('travelMode').selectedOptions[0].text;
+
+  let nights = Math.max(days-1, 1);
+  // Rooms: 2 people per room
+  let rooms = Math.ceil(people/2);
+
+  let ticketTotal = ticketOne * people * 2; // up + down
+  let roomTotal = roomPerNight * nights * rooms;
+  let foodTotal = foodPerDay * people * days;
+  let localTotal = localPerDay * days;
+  let subTotal = ticketTotal + roomTotal + foodTotal + localTotal + extra;
+  let misc = Math.round(subTotal * 0.10);
+  let grand = subTotal + misc;
+  lastTotal = grand;
+  lastBreak = {ticketTotal, roomTotal, foodTotal, localTotal, extra, misc};
+
+  document.getElementById('tripTitle').innerText = from + " ➡️ " + selected;
+  document.getElementById('tripMeta').innerText = days + " Rojulu | " + nights + " Nights | " + people + " Mandhi | " + rooms + " Room(s) | Travel: " + modeText;
+
+  let perPersonTotal = Math.round(grand / people);
+  let badge = perPersonTotal < 5000 ? "✅ BUDGET TRIP - Super!" : perPersonTotal < 15000 ? "😎 MEDIUM TRIP - Perfect!" : "👑 LUXURY TRIP - King Trip!";
+  document.getElementById('budgetBadge').innerText = badge;
+
+  document.getElementById('t1').innerText = modeText + " - Up & Down";
+  document.getElementById('t2').innerText = fmt(ticketOne) + " x " + people + " x 2";
+  document.getElementById('t3').innerText = fmt(ticketTotal);
+
+  document.getElementById('r1').innerText = fmt(roomPerNight) + " / Night - " + rooms + " Room(s)";
+  document.getElementById('r2').innerText = fmt(roomPerNight) + " x " + nights + " Nights x " + rooms;
+  document.getElementById('r3').innerText = fmt(roomTotal);
+
+  document.getElementById('f1').innerText = fmt(foodPerDay) + " / Person / Day";
+  document.getElementById('f2').innerText = fmt(foodPerDay) + " x " + people + " x " + days + " Days";
+  document.getElementById('f3').innerText = fmt(foodTotal);
+
+  document.getElementById('l2').innerText = fmt(localPerDay) + " x " + days + " Days";
+  document.getElementById('l3').innerText = fmt(localTotal);
+  document.getElementById('e3').innerText = fmt(extra);
+  document.getElementById('m3').innerText = fmt(misc);
+
+  document.getElementById('totalText').innerText = "TOTAL: " + fmt(grand);
+  document.getElementById('perPerson').innerText = "Per Person: " + fmt(perPersonTotal) + " | Per Day: " + fmt(Math.round(grand/days));
+
+  // Bars
+  let items = [["🎟️ Tickets",ticketTotal],["🏨 Room",roomTotal],["🍔 Food",foodTotal],["🛺 Local",localTotal],["🎡 Extra",extra],["🧳 Misc",misc]];
+  let barHtml = "";
+  items.forEach(it=>{
+    let pct = Math.round((it[1]/grand)*100);
+    barHtml += '<div style="font-size:13px"><b>'+it[0]+' - '+fmt(it[1])+' ('+pct+'%)</b><div class="bar"><div class="bar-fill" style="width:'+pct+'%"></div></div></div>';
+  });
+  document.getElementById('bars').innerHTML = barHtml;
+
+  let planHtml = "";
+  for(let i=0;i<days;i++) planHtml += '<div class="card"><b>Day '+(i+1)+':</b> '+getPlan(selected,i)+'</div>';
+  document.getElementById('planText').innerHTML = planHtml;
+
+  document.getElementById('tipText').innerText = "💡 Tip: " + selected + " ki velle mundhu tickets munduga book chesuko. Hotel lo breakfast free untunda adugu. Local food tinte money save avuthundi.";
+  document.getElementById('saveTips').innerHTML = '<div class="card">✅ Train lo vellithe Flight kante Rs.' + (ticketOne>1000 ? "2000+ save" : "save") + ' avuthundi<br>✅ Room ni 2 sharing lo teesuko<br>✅ Food - Local hotels lo thinu<br>✅ Off-season lo vellithe Room + Tickets cheap ga vasthayi<br>✅ Group ga vellithe Cab share avuthundi</div>';
+
   document.getElementById('result').style.display = "block";
   document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
 function savePlan(){
-  let txt = document.getElementById('planText').innerText + " | " + document.getElementById('totalText').innerText;
-  localStorage.setItem('tripPlan', txt);
+  localStorage.setItem('tripPlanFull', document.getElementById('tripTitle').innerText + " - Total " + fmt(lastTotal));
   document.getElementById('savedMsg').innerText = "Save Aindi! Made by Muthyala Rakesh";
 }
-function updatePacking(){
-  let pack = "Clothes, Charger, ID Proof, Water Bottle, Snacks, Medicines, Sunglasses, Cash + UPI - " + selected + " trip ki";
-  if(selected.includes("Kashmir") || selected.includes("Manali") || selected.includes("Shimla") || selected.includes("Leh") || selected.includes("Darjeeling") || selected.includes("Gangtok")) pack = "Heavy Sweater / Jacket, Woolen Cap, Gloves, Shoes, Thermal Wear, Medicines, ID Proof - Chali ekkuva untundi!";
-  if(selected.includes("Goa") || selected.includes("Andaman") || selected.includes("Vizag") || selected.includes("Alleppey")) pack = "T-Shirts, Shorts, Sunglasses, Sunscreen, Slippers, Camera, ID Proof, Beach Dress";
-  if(selected.includes("Tirupati") || selected.includes("Varanasi") || selected.includes("Madurai") || selected.includes("Puri")) pack = "Traditional Dress, ID Proof, Temple Ticket Print, Water Bottle, Slippers Bag, Cash";
-  document.getElementById('packing').innerHTML = '<div class="card">🧳 ' + pack + '</div>';
+function sharePlan(){
+  let from = document.getElementById('fromPlace').value || "";
+  let txt = "Trip Plan: " + from + " to " + selected + " - Total " + fmt(lastTotal) + " - Tickets " + fmt(lastBreak.ticketTotal) + ", Room " + fmt(lastBreak.roomTotal) + ", Food " + fmt(lastBreak.foodTotal) + " - Made by Muthyala Rakesh";
+  window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
 }
 renderPlaces();
-updatePacking();
 </script>
 </body>
-</html>
+</html>4
