@@ -1,44 +1,62 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trip Planner PRO</title>
-<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:#FFF7ED;padding:12px}
-h1{text-align:center;color:#EA580C;font-size:22px}.box{background:#fff;padding:14px;border-radius:12px;max-width:600px;margin:12px auto;box-shadow:0 2px 8px #ddd}
-h2{color:#EA580C;font-size:17px;margin:12px 0 8px}label{font-weight:bold;display:block;margin:10px 0 4px;font-size:13px}
-select,input{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc}button{width:100%;background:#EA580C;color:#fff;border:none;padding:12px;border-radius:8px;font-weight:bold;margin-top:12px;cursor:pointer}
-.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px}.p{border:2px solid #eee;border-radius:10px;padding:8px;text-align:center;cursor:pointer;font-size:12px}.p.on{border-color:#EA580C;background:#FFF7ED}
-.card{background:#FFF7ED;padding:10px;border-radius:8px;margin-top:8px;font-size:14px}.total{font-size:20px;color:#EA580C;text-align:center;font-weight:bold;margin-top:10px}
-.tip{background:#FEF3C7;padding:10px;border-radius:8px;margin-top:10px;font-size:13px}iframe{width:100%;height:200px;border:0;border-radius:10px;margin-top:8px}
-img{width:100%;height:160px;object-fit:cover;border-radius:10px}.row{display:flex;gap:8px}.row>div{flex:1}.check{display:flex;gap:8px;padding:6px 0;border-bottom:1px solid #eee;font-size:13px}.check input{width:18px}
+<title>Trip Planner - Colorful</title>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:linear-gradient(135deg,#FF9A9E,#FECFEF,#A18CD1,#FBC2EB,#FFECD2);min-height:100vh;padding:12px;transition:.3s}
+body.dark{background:#1E1E2E;color:#fff}.dark .box{background:#2A2A3A;color:#fff}
+h1{text-align:center;font-size:26px;background:linear-gradient(90deg,#FF0080,#FF8C00,#FFD700,#00C853,#00B0FF,#7C4DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px #fff)}
+.box{background:#fff;padding:15px;border-radius:20px;max-width:600px;margin:12px auto;box-shadow:0 8px 25px rgba(0,0,0,.2);border:3px solid #FFE082}
+h2{font-size:17px;margin:14px 0 8px;color:#E91E63}label{font-weight:bold;display:block;margin:10px 0 4px;font-size:13px;color:#7C4DFF}
+select,input{width:100%;padding:11px;border-radius:12px;border:2px solid #CE93D8;background:#FFFDE7}
+button{width:100%;background:linear-gradient(90deg,#FF4081,#FF9100);color:#fff;border:none;padding:13px;border-radius:15px;font-weight:bold;margin-top:12px;cursor:pointer;font-size:15px;box-shadow:0 4px 12px #FF80AB}
+button:active{transform:scale(.97)}.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.p{border:2px solid #E1BEE7;border-radius:14px;padding:9px;text-align:center;cursor:pointer;font-size:12px;background:linear-gradient(180deg,#FFF,#FCE4EC);font-weight:bold}.p.on{border-color:#FF4081;background:linear-gradient(180deg,#FF80AB,#FFD54F);color:#fff;transform:scale(1.05)}
+.card{padding:11px;border-radius:12px;margin-top:8px;font-size:14px;background:linear-gradient(90deg,#E3F2FD,#F3E5F5);border-left:5px solid #FF4081}
+.card:nth-child(2n){background:linear-gradient(90deg,#FFF9C4,#FFE0B2);border-left-color:#FF9100}
+.total{font-size:21px;text-align:center;font-weight:bold;margin-top:10px;background:linear-gradient(90deg,#FF0080,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.tip{background:linear-gradient(90deg,#FFF59D,#FFCC80);padding:11px;border-radius:12px;margin-top:10px;font-size:13px}
+.trend{background:linear-gradient(90deg,#FF1744,#FF9100);color:#fff;padding:8px 12px;border-radius:20px;font-size:12px;display:inline-block;margin:3px;font-weight:bold}
+.star{color:#FFC107;font-size:16px}iframe{width:100%;height:200px;border:0;border-radius:14px;margin-top:8px}img{width:100%;height:170px;object-fit:cover;border-radius:14px;border:3px solid #FF80AB}
+.row{display:flex;gap:8px}.row>div{flex:1}.check{display:flex;gap:8px;padding:6px 0;border-bottom:1px dashed #CE93D8;font-size:13px}.check input{width:18px}
+.toggle{width:auto;padding:8px 16px;background:#333;font-size:12px;float:right}
 </style></head><body>
-<h1>✈️ Trip Planner PRO 🇮🇳</h1>
+<button class="toggle" onclick="document.body.classList.toggle('dark')">🌙 Dark Mode</button>
+<h1>✈️🌈 Trip Planner PRO 🇮🇳🎉</h1><p style="text-align:center;font-weight:bold;color:#D500F9">Colorful Trips - Colorful Memories!</p>
+
+<div class="box" style="background:linear-gradient(90deg,#FF5252,#FF4081);color:#fff;text-align:center">
+<b>🔥 TRENDING THIS WEEK 🔥</b><br><span class="trend" style="background:#fff;color:#FF1744">🔥 Goa - 2.5k Planning</span><span class="trend" style="background:#FFEB3B;color:#333">❄️ Manali - 1.8k</span><span class="trend" style="background:#00E676">🏖️ Vizag - 1.2k</span>
+</div>
+
 <div class="box">
-<label>From</label><select id="from"><option>Anantapur</option><option>Hyderabad</option><option>Vizag</option><option>Bangalore</option><option>Delhi</option></select>
-<label>Place</label><div class="grid" id="places"></div>
+<label>🌍 From</label><select id="from"><option>Anantapur</option><option>Hyderabad</option><option>Vizag</option><option>Bangalore</option><option>Delhi</option></select>
+<label>📍 Place + Rating</label><div class="grid" id="places"></div>
+<div id="rating" style="text-align:center;margin-top:8px;font-weight:bold;color:#FF6D00"></div>
 <label>📅 Date</label><input type="date" id="date" value="2026-11-25">
-<div class="row"><div><label>Days</label><select id="days"><option>2</option><option>3</option><option>4</option><option>5</option></select></div>
-<div><label>Members</label><input type="number" id="people" value="2" min="1" onchange="members()"></div></div>
-<label>Travel</label><select id="mode" onchange="auto()"><option value="train">Train Sleeper</option><option value="ac">Train AC</option><option value="bus">Bus</option><option value="flight">Flight</option></select>
-<label>Ticket(1 Person One Side)</label><input id="ticket" type="number" value="500">
-<label>Room(1 Night)</label><input id="room" type="number" value="1500">
-<label>Food(1 Person/Day)</label><input id="food" type="number" value="600">
-<label>Local/Day</label><input id="local" type="number" value="500">
-<label>Extra Total</label><input id="extra" type="number" value="1000">
-<label>Members Peru</label><div id="mem"></div>
-<button onclick="plan()">Plan Chupinchu ➡️</button></div>
+<div class="row"><div><label>📆 Days</label><select id="days"><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div><label>👥 Members</label><input type="number" id="people" value="2" onchange="members()"></div></div>
+<label>🚀 Travel</label><select id="mode" onchange="auto()"><option value="train">🚂 Train Sleeper</option><option value="ac">🚂 Train AC</option><option value="bus">🚌 Bus</option><option value="flight">✈️ Flight</option></select>
+<label>🎟️ Ticket</label><input id="ticket" type="number" value="500">
+<label>🏨 Room</label><input id="room" type="number" value="1500">
+<label>🍔 Food</label><input id="food" type="number" value="600">
+<label>🛺 Local</label><input id="local" type="number" value="500">
+<label>🎡 Extra</label><input id="extra" type="number" value="1000">
+<label>👨‍👩‍👧 Members Peru</label><div id="mem"></div>
+<button onclick="plan()">🎉 Plan Chupinchu ➡️</button></div>
+
 <div class="box" id="res" style="display:none">
 <h2 id="title"></h2><p id="meta"></p>
-<h2>🌦️ Weather</h2><div class="card" id="weather"></div>
-<h2>📸 Photos</h2><img id="photo"><h2>💰 Budget</h2><div id="break"></div><div class="total" id="total"></div>
-<h2>👨‍👩‍👧 Split</h2><div id="split"></div><h2>🗓️ Plan</h2><div id="planTxt"></div>
-<h2>🚂 Train</h2><div class="card" id="train"></div><button onclick="window.open('https://www.irctc.co.in','_blank')" style="background:#2563EB">IRCTC Open</button>
-<h2>🏨 Hotels</h2><button onclick="hotel()" style="background:#16A34A">MakeMyTrip / OYO Open</button>
+<h2>🌦️ Weather + Best Time</h2><div class="card" id="weather"></div>
+<h2>📸 Photos</h2><img id="photo">
+<h2>💰 Budget - Colorful Breakdown</h2><div id="break"></div><div class="total" id="total"></div><div id="bars"></div>
+<h2>👨‍👩‍👧 Split</h2><div id="split"></div><h2>🗓️ Date-wise Plan</h2><div id="planTxt"></div>
+<h2>🚂 Train</h2><div class="card" id="train"></div><button onclick="window.open('https://www.irctc.co.in','_blank')" style="background:linear-gradient(90deg,#2979FF,#00BCD4)">IRCTC Open 🚂</button>
+<h2>🏨 Hotels</h2><button onclick="hotel()" style="background:linear-gradient(90deg,#00C853,#64DD17)">MakeMyTrip / OYO 🏨</button>
 <h2>🧳 Packing</h2><div id="pack"></div><p id="prog"></p>
-<h2>🗺️ Map</h2><iframe id="map"></iframe><button onclick="window.open('https://www.google.com/maps/search/'+selected,'_blank')" style="background:#DB2777">Maps Open</button>
-<button onclick="share()" style="background:#16A34A">WhatsApp Share 💬</button></div>
-<p style="text-align:center;font-weight:bold;margin:15px">Made by <span style="color:#EA580C">Muthyala Rakesh</span> ❤️</p>
+<h2>🗺️ Map</h2><iframe id="map"></iframe><button onclick="window.open('https://www.google.com/maps/search/'+selected,'_blank')" style="background:linear-gradient(90deg,#AA00FF,#FF4081)">Maps Open 🗺️</button>
+<button onclick="share()" style="background:linear-gradient(90deg,#25D366,#00BFA5)">WhatsApp Share 💬</button></div>
+<p style="text-align:center;font-weight:bold;margin:15px;font-size:16px">Made with 💖🌈 by <span style="color:#FF4081">Muthyala Rakesh</span> 🇮🇳</p>
 <script>
-let D={"Vizag":[550,1500,600,600,1000,"29°C Beach, Best Oct-Mar","Visakha Exp - Night 9 PM","vizag beach"],"Goa":[650,2200,800,800,2500,"29°C Beach, Best Nov-Feb","Goa Exp - Daily 14 Hrs","goa beach"],"Delhi":[1700,2000,700,700,1500,"18°C Winter, Best Oct-Mar","AP Exp - Daily 26 Hrs","delhi india gate"],"Manali":[2000,2000,700,800,2500,"5°C Snow, Best Oct-Feb","Delhi-Manali Volvo 12 Hrs","manali snow"],"Kashmir":[2400,2500,800,1000,3500,"2°C Snow, Best Mar-Oct","Jammu Exp + Cab 8 Hrs","kashmir dal lake"],"Tirupati":[200,1200,500,400,500,"28°C Hot, Best Sep-Feb","Tirupati Exp - Daily","tirupati temple"],"Hyderabad":[350,1600,650,600,1000,"30°C Hot, Best Oct-Feb","Hyderabad Exp - Daily","hyderabad charminar"],"Ooty":[350,1800,650,700,1200,"18°C Cool, Best Apr-Jun","Nilgiri Exp + Toy Train","ooty hills"],"Mumbai":[900,2500,800,800,2000,"30°C Humid, Best Oct-Feb","Mumbai Exp - Daily","mumbai gateway"],"Jaipur":[1600,1700,650,700,1500,"22°C Best Oct-Mar","Jaipur Exp - Via Delhi","jaipur hawa mahal"],"Kolkata":[1500,1600,600,500,1000,"22°C Best Oct-Feb","Howrah Exp - Daily","kolkata howrah"],"Andaman":[1200,3000,900,1000,5000,"29°C Beach, Best Oct-May","Flight Chennai 2 Hrs","andaman beach"]};
+let D={"Vizag":[550,1500,600,600,1000,"29°C Beach, Best Oct-Mar","Visakha Exp - Night 9 PM","vizag beach","4.7"],"Goa":[650,2200,800,800,2500,"29°C Beach, Best Nov-Feb","Goa Exp - Daily 14 Hrs","goa beach","4.9"],"Delhi":[1700,2000,700,700,1500,"18°C Winter, Best Oct-Mar","AP Exp - Daily 26 Hrs","delhi india gate","4.6"],"Manali":[2000,2000,700,800,2500,"5°C Snow, Best Oct-Feb","Delhi-Manali Volvo 12 Hrs","manali snow","4.8"],"Kashmir":[2400,2500,800,1000,3500,"2°C Snow, Best Mar-Oct","Jammu Exp + Cab 8 Hrs","kashmir dal lake","4.9"],"Tirupati":[200,1200,500,400,500,"28°C Hot, Best Sep-Feb","Tirupati Exp - Daily","tirupati temple","4.8"],"Hyderabad":[350,1600,650,600,1000,"30°C Hot, Best Oct-Feb","Hyderabad Exp - Daily","hyderabad charminar","4.5"],"Ooty":[350,1800,650,700,1200,"18°C Cool, Best Apr-Jun","Nilgiri Exp + Toy Train","ooty hills","4.7"],"Mumbai":[900,2500,800,800,2000,"30°C Humid, Best Oct-Feb","Mumbai Exp - Daily","mumbai gateway","4.4"],"Jaipur":[1600,1700,650,700,1500,"22°C Best Oct-Mar","Jaipur Exp - Via Delhi","jaipur hawa mahal","4.7"],"Kolkata":[1500,1600,600,500,1000,"22°C Best Oct-Feb","Howrah Exp - Daily","kolkata howrah","4.5"],"Andaman":[1200,3000,900,1000,5000,"29°C Beach, Best Oct-May","Flight Chennai 2 Hrs","andaman beach","4.9"]};
 let sel="Vizag",last=0;
-function render(){let b=document.getElementById('places');b.innerHTML="";Object.keys(D).forEach(k=>{let d=document.createElement('div');d.className='p'+(k==sel?' on':'');d.innerHTML=k;d.onclick=()=>{sel=k;render();auto()};b.appendChild(d)})}
+function render(){let b=document.getElementById('places');b.innerHTML="";Object.keys(D).forEach(k=>{let d=document.createElement('div');d.className='p'+(k==sel?' on':'');d.innerHTML="⭐"+D[k][8]+"<br>"+k;d.onclick=()=>{sel=k;render();auto();showRate()};b.appendChild(d)});showRate()}
+function showRate(){document.getElementById('rating').innerHTML="⭐ ".repeat(5)+" <span class='star'>"+D[sel][8]+" / 5 Rating</span> - "+sel+" Super Place!"}
 function members(){let n=+document.getElementById('people').value||2,m=document.getElementById('mem');m.innerHTML="";for(let i=0;i<n;i++)m.innerHTML+='<input class="mn" value="'+(i==0?'Rakesh':'Friend '+(i+1))+'" style="margin-top:5px">'}
 function auto(){let f=document.getElementById('from').value,mode=document.getElementById('mode').value,dist=D[sel][0];if(f=="Hyderabad")dist=Math.max(150,dist-300);if(f=="Bangalore")dist=Math.max(150,dist-150);if(f=="Delhi")dist=Math.max(200,Math.abs(dist-1700));
 let t=mode=="train"?Math.round(dist*0.55+100):mode=="ac"?Math.round(dist*1.4+150):mode=="bus"?Math.round(dist*1.6+100):Math.round(1500+dist*2.2);
@@ -47,21 +65,24 @@ function fmt(n){return"Rs."+n.toLocaleString('en-IN')}
 function plan(){let days=+document.getElementById('days').value,pe=+document.getElementById('people').value||1,t=+document.getElementById('ticket').value,r=+document.getElementById('room').value,fo=+document.getElementById('food').value,lo=+document.getElementById('local').value,ex=+document.getElementById('extra').value;
 let nights=Math.max(days-1,1),rooms=Math.ceil(pe/2),tt=t*pe*2,rt=r*nights*rooms,ft=fo*pe*days,lt=lo*days,sub=tt+rt+ft+lt+ex,misc=Math.round(sub*.1),grand=sub+misc;last=grand;
 let d=new Date(document.getElementById('date').value||new Date());
-document.getElementById('title').innerText=document.getElementById('from').value+" ➡️ "+sel;
-document.getElementById('meta').innerText=days+" Days | "+nights+" Nights | "+pe+" Members | "+rooms+" Room";
-document.getElementById('weather').innerText="🌡️ "+D[sel][5]+" | 💡 "+D[sel][5].split(',')[1]||"";
+document.getElementById('title').innerText=document.getElementById('from').value+" ➡️ "+sel+" 🎉";
+document.getElementById('meta').innerText="⭐ "+D[sel][8]+" | "+days+" Days | "+nights+" Nights | "+pe+" Members | "+rooms+" Room";
+document.getElementById('weather').innerText="🌡️ "+D[sel][5];
 document.getElementById('photo').src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800";
-document.getElementById('break').innerHTML=`<div class="card">🎟️ Tickets: ${fmt(t)} x ${pe} x 2 = <b>${fmt(tt)}</b><br>🏨 Room: ${fmt(r)} x ${nights} x ${rooms} = <b>${fmt(rt)}</b><br>🍔 Food: ${fmt(fo)} x ${pe} x ${days} = <b>${fmt(ft)}</b><br>🛺 Local: ${fmt(lo)} x ${days} = <b>${fmt(lt)}</b><br>🎡 Extra: <b>${fmt(ex)}</b><br>🧳 Misc 10%: <b>${fmt(misc)}</b></div>`;
+document.getElementById('break').innerHTML=`<div class="card">🎟️ Tickets: ${fmt(tt)}<br>🏨 Room: ${fmt(rt)}<br>🍔 Food: ${fmt(ft)}<br>🛺 Local: ${fmt(lt)}<br>🎡 Extra: ${fmt(ex)}<br>🧳 Misc: ${fmt(misc)}</div>`;
 document.getElementById('total').innerText="TOTAL: "+fmt(grand)+" | Per Person: "+fmt(Math.round(grand/pe));
+let items=[["🎟️ Tickets",tt,"#FF4081"],["🏨 Room",rt,"#FF9100"],["🍔 Food",ft,"#00C853"],["🛺 Local",lt,"#2979FF"],["🎡 Extra",ex,"#AA00FF"]];document.getElementById('bars').innerHTML=items.map(it=>`<div style="font-size:12px;font-weight:bold">${it[0]} ${fmt(it[1])} (${Math.round(it[1]/grand*100)}%)<div style="height:12px;background:#eee;border-radius:10px;overflow:hidden"><div style="height:100%;width:${Math.round(it[1]/grand*100)}%;background:${it[2]}"></div></div></div>`).join("");
 let names=[...document.querySelectorAll('.mn')].map(e=>e.value||"Friend");document.getElementById('split').innerHTML=names.map(n=>`<div class="card">👤 ${n} : <b>${fmt(Math.round(grand/pe))}</b></div>`).join("");
-let ph="";for(let i=0;i<days;i++){let dd=new Date(d);dd.setDate(dd.getDate()+i);ph+=`<div class="card"><b>${dd.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} Day ${i+1}:</b> ${sel} Sightseeing - Food - Shopping</div>`}document.getElementById('planTxt').innerHTML=ph;
+let ph="";for(let i=0;i<days;i++){let dd=new Date(d);dd.setDate(dd.getDate()+i);ph+=`<div class="card"><b>📅 ${dd.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} Day ${i+1}:</b> ${sel} Sightseeing - Food - Shopping 🎉</div>`}document.getElementById('planTxt').innerHTML=ph;
 document.getElementById('train').innerText="🚂 "+D[sel][6]+" | Ticket "+fmt(t);
 let packs=["👕 Clothes","🔌 Charger","🪪 ID Proof","💧 Water Bottle","💊 Medicines","🕶️ Sunglasses","💰 Cash + UPI","👟 Shoes","📸 Camera"];if(sel=="Manali"||sel=="Kashmir")packs.push("🧥 Jacket","🧤 Gloves");
-document.getElementById('pack').innerHTML=packs.map((p,i)=>`<div class="check"><input type="checkbox" onchange="upd()"> ${p}</div>`).join("");document.getElementById('prog').innerText="0 / "+packs.length+" packed";
+document.getElementById('pack').innerHTML=packs.map(p=>`<div class="check"><input type="checkbox" onchange="upd()"> ${p}</div>`).join("");document.getElementById('prog').innerText="0 / "+packs.length+" packed";
 document.getElementById('map').src="https://maps.google.com/maps?q="+encodeURIComponent(sel+" India")+"&output=embed";
-document.getElementById('res').style.display="block";document.getElementById('res').scrollIntoView({behavior:'smooth'})}
-function upd(){let a=[...document.querySelectorAll('#pack input')],d=a.filter(c=>c.checked).length;document.getElementById('prog').innerText=d+" / "+a.length+" packed"+(d==a.length?" 🎉 Ready!":"")}
-function hotel(){window.open("https://www.makemytrip.com/hotels/hotel-listing/?searchText="+encodeURIComponent(sel)," _blank")}
-function share(){let t="Trip: "+document.getElementById('from').value+" to "+sel+" Total "+fmt(last)+" Made by Muthyala Rakesh";window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
+document.getElementById('res').style.display="block";document.getElementById('res').scrollIntoView({behavior:'smooth'});
+// Confetti
+for(let i=0;i<40;i++){let s=document.createElement('div');s.innerText=["🎉","🌈","⭐","💖","✨"][i%5];s.style.cssText="position:fixed;top:-20px;left:"+(Math.random()*100)+"%;font-size:22px;z-index:999;transition:3s";document.body.appendChild(s);setTimeout(()=>{s.style.top="100%";s.style.transform="rotate(360deg)"},50);setTimeout(()=>s.remove(),3200)}}
+function upd(){let a=[...document.querySelectorAll('#pack input')],d=a.filter(c=>c.checked).length;document.getElementById('prog').innerText=d+" / "+a.length+" packed"+(d==a.length?" 🎉 Full Ready!":"")}
+function hotel(){window.open("https://www.makemytrip.com/hotels/hotel-listing/?searchText="+encodeURIComponent(sel),"_blank")}
+function share(){let t="Trip: "+document.getElementById('from').value+" to "+sel+" Total "+fmt(last)+" Made by Muthyala Rakesh 🌈";window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
 render();members();auto();
 </script></body></html>
