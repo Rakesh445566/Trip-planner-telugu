@@ -1,88 +1,126 @@
 <!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Trip Planner - Colorful</title>
-<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:linear-gradient(135deg,#FF9A9E,#FECFEF,#A18CD1,#FBC2EB,#FFECD2);min-height:100vh;padding:12px;transition:.3s}
-body.dark{background:#1E1E2E;color:#fff}.dark .box{background:#2A2A3A;color:#fff}
-h1{text-align:center;font-size:26px;background:linear-gradient(90deg,#FF0080,#FF8C00,#FFD700,#00C853,#00B0FF,#7C4DFF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 2px #fff)}
-.box{background:#fff;padding:15px;border-radius:20px;max-width:600px;margin:12px auto;box-shadow:0 8px 25px rgba(0,0,0,.2);border:3px solid #FFE082}
-h2{font-size:17px;margin:14px 0 8px;color:#E91E63}label{font-weight:bold;display:block;margin:10px 0 4px;font-size:13px;color:#7C4DFF}
-select,input{width:100%;padding:11px;border-radius:12px;border:2px solid #CE93D8;background:#FFFDE7}
-button{width:100%;background:linear-gradient(90deg,#FF4081,#FF9100);color:#fff;border:none;padding:13px;border-radius:15px;font-weight:bold;margin-top:12px;cursor:pointer;font-size:15px;box-shadow:0 4px 12px #FF80AB}
-button:active{transform:scale(.97)}.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
-.p{border:2px solid #E1BEE7;border-radius:14px;padding:9px;text-align:center;cursor:pointer;font-size:12px;background:linear-gradient(180deg,#FFF,#FCE4EC);font-weight:bold}.p.on{border-color:#FF4081;background:linear-gradient(180deg,#FF80AB,#FFD54F);color:#fff;transform:scale(1.05)}
-.card{padding:11px;border-radius:12px;margin-top:8px;font-size:14px;background:linear-gradient(90deg,#E3F2FD,#F3E5F5);border-left:5px solid #FF4081}
-.card:nth-child(2n){background:linear-gradient(90deg,#FFF9C4,#FFE0B2);border-left-color:#FF9100}
-.total{font-size:21px;text-align:center;font-weight:bold;margin-top:10px;background:linear-gradient(90deg,#FF0080,#FFD700);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+<title>Temple Trip Planner - All India</title>
+<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Arial}body{background:linear-gradient(135deg,#FF9933,#FFD700,#FFF3C4,#FFE0B2);min-height:100vh;padding:12px}
+h1{text-align:center;font-size:24px;background:linear-gradient(90deg,#FF5722,#FF9800,#E65100);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.box{background:#fff;padding:15px;border-radius:20px;max-width:620px;margin:12px auto;box-shadow:0 8px 25px rgba(0,0,0,.2);border:3px solid #FF9800}
+h2{font-size:17px;margin:14px 0 8px;color:#E65100}label{font-weight:bold;display:block;margin:10px 0 4px;font-size:13px;color:#BF360C}
+select,input{width:100%;padding:11px;border-radius:12px;border:2px solid #FFCC80;background:#FFFDE7}
+button{width:100%;background:linear-gradient(90deg,#FF5722,#FF9800);color:#fff;border:none;padding:13px;border-radius:15px;font-weight:bold;margin-top:12px;cursor:pointer;font-size:15px}
+.grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
+.p{border:2px solid #FFE0B2;border-radius:14px;padding:9px;text-align:center;cursor:pointer;font-size:12px;background:linear-gradient(180deg,#FFF,#FFF3E0);font-weight:bold}.p.on{border-color:#FF5722;background:linear-gradient(180deg,#FF5722,#FFC107);color:#fff;transform:scale(1.05)}
+.card{padding:11px;border-radius:12px;margin-top:8px;font-size:14px;background:linear-gradient(90deg,#FFF3E0,#FFE0B2);border-left:5px solid #FF5722}
+.total{font-size:21px;text-align:center;font-weight:bold;margin-top:10px;color:#E65100}
 .tip{background:linear-gradient(90deg,#FFF59D,#FFCC80);padding:11px;border-radius:12px;margin-top:10px;font-size:13px}
-.trend{background:linear-gradient(90deg,#FF1744,#FF9100);color:#fff;padding:8px 12px;border-radius:20px;font-size:12px;display:inline-block;margin:3px;font-weight:bold}
-.star{color:#FFC107;font-size:16px}iframe{width:100%;height:200px;border:0;border-radius:14px;margin-top:8px}img{width:100%;height:170px;object-fit:cover;border-radius:14px;border:3px solid #FF80AB}
-.row{display:flex;gap:8px}.row>div{flex:1}.check{display:flex;gap:8px;padding:6px 0;border-bottom:1px dashed #CE93D8;font-size:13px}.check input{width:18px}
-.toggle{width:auto;padding:8px 16px;background:#333;font-size:12px;float:right}
+.trend{background:linear-gradient(90deg,#FF5722,#FF9800);color:#fff;padding:8px 12px;border-radius:20px;font-size:12px;display:inline-block;margin:3px;font-weight:bold}
+iframe{width:100%;height:200px;border:0;border-radius:14px;margin-top:8px}img{width:100%;height:170px;object-fit:cover;border-radius:14px;border:3px solid #FF9800}
+.row{display:flex;gap:8px}.row>div{flex:1}.check{display:flex;gap:8px;padding:6px 0;border-bottom:1px dashed #FFCC80;font-size:13px}.check input{width:18px}
 </style></head><body>
-<button class="toggle" onclick="document.body.classList.toggle('dark')">🌙 Dark Mode</button>
-<h1>✈️🌈 Trip Planner PRO 🇮🇳🎉</h1><p style="text-align:center;font-weight:bold;color:#D500F9">Colorful Trips - Colorful Memories!</p>
+<h1>🛕 All India Temple Trip Planner 🙏</h1><p style="text-align:center;font-weight:bold;color:#BF360C">Hindu Temples Only - Darshan Yatra</p>
 
-<div class="box" style="background:linear-gradient(90deg,#FF5252,#FF4081);color:#fff;text-align:center">
-<b>🔥 TRENDING THIS WEEK 🔥</b><br><span class="trend" style="background:#fff;color:#FF1744">🔥 Goa - 2.5k Planning</span><span class="trend" style="background:#FFEB3B;color:#333">❄️ Manali - 1.8k</span><span class="trend" style="background:#00E676">🏖️ Vizag - 1.2k</span>
+<div class="box" style="background:linear-gradient(90deg,#FF5722,#FF9800);color:#fff;text-align:center">
+<b>🔥 TRENDING TEMPLES THIS WEEK 🔥</b><br><span class="trend" style="background:#fff;color:#E65100">🛕 Tirupati - 5k Darshan</span><span class="trend" style="background:#FFEB3B;color:#333">🛕 Kashi - 3k</span><span class="trend" style="background:#00E676">🛕 Ayodhya - 2.8k</span>
 </div>
 
 <div class="box">
-<label>🌍 From</label><select id="from"><option>Anantapur</option><option>Hyderabad</option><option>Vizag</option><option>Bangalore</option><option>Delhi</option></select>
-<label>📍 Place + Rating</label><div class="grid" id="places"></div>
-<div id="rating" style="text-align:center;margin-top:8px;font-weight:bold;color:#FF6D00"></div>
-<label>📅 Date</label><input type="date" id="date" value="2026-11-25">
-<div class="row"><div><label>📆 Days</label><select id="days"><option>2</option><option>3</option><option>4</option><option>5</option></select></div><div><label>👥 Members</label><input type="number" id="people" value="2" onchange="members()"></div></div>
+<label>🌍 Nee Place (From)</label><select id="from"><option>Anantapur</option><option>Hyderabad</option><option>Vizag</option><option>Vijayawada</option><option>Bangalore</option><option>Chennai</option><option>Delhi</option></select>
+<label>🛕 Temple Select Chey</label><div class="grid" id="places"></div>
+<div id="deity" style="text-align:center;margin-top:8px;font-weight:bold;color:#E65100"></div>
+<label>📅 Darshan Date</label><input type="date" id="date" value="2026-11-25">
+<div class="row"><div><label>📆 Days</label><select id="days"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option></select></div><div><label>👥 Members</label><input type="number" id="people" value="2" onchange="members()"></div></div>
 <label>🚀 Travel</label><select id="mode" onchange="auto()"><option value="train">🚂 Train Sleeper</option><option value="ac">🚂 Train AC</option><option value="bus">🚌 Bus</option><option value="flight">✈️ Flight</option></select>
-<label>🎟️ Ticket</label><input id="ticket" type="number" value="500">
-<label>🏨 Room</label><input id="room" type="number" value="1500">
-<label>🍔 Food</label><input id="food" type="number" value="600">
-<label>🛺 Local</label><input id="local" type="number" value="500">
-<label>🎡 Extra</label><input id="extra" type="number" value="1000">
-<label>👨‍👩‍👧 Members Peru</label><div id="mem"></div>
-<button onclick="plan()">🎉 Plan Chupinchu ➡️</button></div>
+<label>🎟️ Ticket (1 Person One Side)</label><input id="ticket" type="number" value="200">
+<label>🏨 Room (1 Night)</label><input id="room" type="number" value="1000">
+<label>🍔 Food (1 Person / Day)</label><input id="food" type="number" value="400">
+<label>🛺 Local / Auto (Day)</label><input id="local" type="number" value="400">
+<label>🎁 Prasadam / Donation / Extra</label><input id="extra" type="number" value="500">
+<label>👨‍👩‍👧 Family Members Peru</label><div id="mem"></div>
+<button onclick="plan()">🙏 Darshan Plan Chupinchu ➡️</button></div>
 
 <div class="box" id="res" style="display:none">
 <h2 id="title"></h2><p id="meta"></p>
+<h2>🛕 Temple Details</h2><div class="card" id="templeInfo"></div>
 <h2>🌦️ Weather + Best Time</h2><div class="card" id="weather"></div>
-<h2>📸 Photos</h2><img id="photo">
-<h2>💰 Budget - Colorful Breakdown</h2><div id="break"></div><div class="total" id="total"></div><div id="bars"></div>
-<h2>👨‍👩‍👧 Split</h2><div id="split"></div><h2>🗓️ Date-wise Plan</h2><div id="planTxt"></div>
-<h2>🚂 Train</h2><div class="card" id="train"></div><button onclick="window.open('https://www.irctc.co.in','_blank')" style="background:linear-gradient(90deg,#2979FF,#00BCD4)">IRCTC Open 🚂</button>
-<h2>🏨 Hotels</h2><button onclick="hotel()" style="background:linear-gradient(90deg,#00C853,#64DD17)">MakeMyTrip / OYO 🏨</button>
-<h2>🧳 Packing</h2><div id="pack"></div><p id="prog"></p>
-<h2>🗺️ Map</h2><iframe id="map"></iframe><button onclick="window.open('https://www.google.com/maps/search/'+selected,'_blank')" style="background:linear-gradient(90deg,#AA00FF,#FF4081)">Maps Open 🗺️</button>
-<button onclick="share()" style="background:linear-gradient(90deg,#25D366,#00BFA5)">WhatsApp Share 💬</button></div>
-<p style="text-align:center;font-weight:bold;margin:15px;font-size:16px">Made with 💖🌈 by <span style="color:#FF4081">Muthyala Rakesh</span> 🇮🇳</p>
+<h2>📸 Temple Photo</h2><img id="photo">
+<h2>💰 Yatra Budget</h2><div id="break"></div><div class="total" id="total"></div><div id="bars"></div>
+<h2>👨‍👩‍👧 Family Split</h2><div id="split"></div>
+<h2>🗓️ Date-wise Darshan Plan</h2><div id="planTxt"></div>
+<h2>🚂 Train Info</h2><div class="card" id="train"></div><button onclick="window.open('https://www.irctc.co.in','_blank')" style="background:#2979FF">IRCTC Open 🚂</button>
+<h2>🏨 Stay / Rooms</h2><div class="card" id="hotel"></div><button onclick="hotel()" style="background:#00C853">Hotels / Rooms Chudu 🏨</button>
+<h2>🧳 Yatra Packing - Temple ki</h2><div id="pack"></div><p id="prog"></p>
+<h2>🗺️ Temple Map</h2><iframe id="map"></iframe><button onclick="window.open('https://www.google.com/maps/search/'+selected,'_blank')" style="background:#AA00FF">Maps Open 🗺️</button>
+<button onclick="share()" style="background:#25D366">WhatsApp Share 💬</button></div>
+<p style="text-align:center;font-weight:bold;margin:15px">Made with 🙏 by <span style="color:#FF5722">Muthyala Rakesh</span> 🛕</p>
+
 <script>
-let D={"Vizag":[550,1500,600,600,1000,"29°C Beach, Best Oct-Mar","Visakha Exp - Night 9 PM","vizag beach","4.7"],"Goa":[650,2200,800,800,2500,"29°C Beach, Best Nov-Feb","Goa Exp - Daily 14 Hrs","goa beach","4.9"],"Delhi":[1700,2000,700,700,1500,"18°C Winter, Best Oct-Mar","AP Exp - Daily 26 Hrs","delhi india gate","4.6"],"Manali":[2000,2000,700,800,2500,"5°C Snow, Best Oct-Feb","Delhi-Manali Volvo 12 Hrs","manali snow","4.8"],"Kashmir":[2400,2500,800,1000,3500,"2°C Snow, Best Mar-Oct","Jammu Exp + Cab 8 Hrs","kashmir dal lake","4.9"],"Tirupati":[200,1200,500,400,500,"28°C Hot, Best Sep-Feb","Tirupati Exp - Daily","tirupati temple","4.8"],"Hyderabad":[350,1600,650,600,1000,"30°C Hot, Best Oct-Feb","Hyderabad Exp - Daily","hyderabad charminar","4.5"],"Ooty":[350,1800,650,700,1200,"18°C Cool, Best Apr-Jun","Nilgiri Exp + Toy Train","ooty hills","4.7"],"Mumbai":[900,2500,800,800,2000,"30°C Humid, Best Oct-Feb","Mumbai Exp - Daily","mumbai gateway","4.4"],"Jaipur":[1600,1700,650,700,1500,"22°C Best Oct-Mar","Jaipur Exp - Via Delhi","jaipur hawa mahal","4.7"],"Kolkata":[1500,1600,600,500,1000,"22°C Best Oct-Feb","Howrah Exp - Daily","kolkata howrah","4.5"],"Andaman":[1200,3000,900,1000,5000,"29°C Beach, Best Oct-May","Flight Chennai 2 Hrs","andaman beach","4.9"]};
-let sel="Vizag",last=0;
-function render(){let b=document.getElementById('places');b.innerHTML="";Object.keys(D).forEach(k=>{let d=document.createElement('div');d.className='p'+(k==sel?' on':'');d.innerHTML="⭐"+D[k][8]+"<br>"+k;d.onclick=()=>{sel=k;render();auto();showRate()};b.appendChild(d)});showRate()}
-function showRate(){document.getElementById('rating').innerHTML="⭐ ".repeat(5)+" <span class='star'>"+D[sel][8]+" / 5 Rating</span> - "+sel+" Super Place!"}
-function members(){let n=+document.getElementById('people').value||2,m=document.getElementById('mem');m.innerHTML="";for(let i=0;i<n;i++)m.innerHTML+='<input class="mn" value="'+(i==0?'Rakesh':'Friend '+(i+1))+'" style="margin-top:5px">'}
-function auto(){let f=document.getElementById('from').value,mode=document.getElementById('mode').value,dist=D[sel][0];if(f=="Hyderabad")dist=Math.max(150,dist-300);if(f=="Bangalore")dist=Math.max(150,dist-150);if(f=="Delhi")dist=Math.max(200,Math.abs(dist-1700));
-let t=mode=="train"?Math.round(dist*0.55+100):mode=="ac"?Math.round(dist*1.4+150):mode=="bus"?Math.round(dist*1.6+100):Math.round(1500+dist*2.2);
+// [dist, room, food, local, extra, weather, train, deity, darshan timing, rating]
+let D={
+"Tirupati":[200,1200,500,400,500,"28°C Hot, Best Sep-Feb","Tirupati Exp Daily","Sri Venkateswara Swamy","Darshan: 3 AM - 1 AM, Special Entry Rs.300","4.9"],
+"Srisailam":[250,1000,400,400,500,"29°C Hot, Best Oct-Mar","Bus - Anantapur 5 Hrs","Sri Mallikarjuna Swamy - Jyotirlingam","Darshan: 4:30 AM - 10 PM","4.8"],
+"Simhachalam":[550,1200,500,400,500,"29°C Beach, Best Oct-Mar","Vizag Exp","Sri Varaha Lakshmi Narasimha Swamy","Darshan: 6 AM - 8 PM","4.7"],
+"Annavaram":[500,900,400,300,400,"30°C Hot, Best Oct-Mar","Annavaram Exp","Sri Satyanarayana Swamy","Darshan: 6 AM - 9 PM","4.7"],
+"Kanipakam":[150,900,400,300,400,"29°C Hot, Best Year","Bus - Chittoor","Sri Varasiddhi Vinayaka Swamy","Darshan: 5 AM - 9 PM","4.8"],
+"Mantralayam":[180,800,400,300,400,"30°C Hot, Best Oct-Mar","Mantralayam Road Station","Sri Raghavendra Swamy","Darshan: 6 AM - 8 PM","4.8"],
+"Yadagirigutta":[400,1000,450,400,500,"30°C Hot, Best Oct-Mar","Hyderabad Exp","Sri Lakshmi Narasimha Swamy","Darshan: 4 AM - 9:30 PM","4.8"],
+"Basara":[450,900,400,300,400,"29°C Hot, Best Oct-Mar","Basar Station","Sri Gnana Saraswathi Amma","Darshan: 6 AM - 8 PM","4.7"],
+"Vemulawada":[420,800,400,300,400,"30°C Hot, Best Oct-Mar","Karimnagar Bus","Sri Raja Rajeshwara Swamy","Darshan: 5 AM - 8 PM","4.7"],
+"Bhadrachalam":[550,1000,400,400,500,"30°C Hot, Best Oct-Mar","Bhadrachalam Road","Sri Sita Ramachandra Swamy","Darshan: 6 AM - 9 PM","4.8"],
+"Madurai Meenakshi":[400,1100,450,400,500,"31°C Hot, Best Oct-Mar","Madurai Exp","Sri Meenakshi Amman - Sundareswarar","Darshan: 5 AM - 10 PM","4.9"],
+"Rameshwaram":[650,1200,500,500,800,"30°C Hot, Best Oct-Mar","Rameshwaram Exp","Sri Ramanathaswamy - Jyotirlingam","Darshan: 5 AM - 9 PM, Theertham Rs.50","4.9"],
+"Thanjavur":[550,1100,450,400,500,"31°C Hot, Best Oct-Mar","Thanjavur Exp","Sri Brihadeeswara - Big Temple","Darshan: 6 AM - 8:30 PM","4.8"],
+"Chidambaram":[600,1000,450,400,500,"31°C Hot, Best Oct-Mar","Chidambaram Station","Sri Nataraja Swamy","Darshan: 6 AM - 8 PM","4.8"],
+"Palani":[450,1100,450,500,600,"29°C Pleasant, Best Oct-Mar","Palani Station","Sri Murugan Swamy - Hill Temple","Darshan: 6 AM - 9 PM, Rope Car Rs.50","4.8"],
+"Guruvayur":[650,1300,500,400,600,"29°C Humid, Best Oct-Mar","Guruvayur Exp","Sri Guruvayurappan - Krishna","Darshan: 3 AM - 9 PM","4.9"],
+"Sabarimala":[700,1200,450,500,800,"25°C Cool, Best Nov-Jan Season","Kottayam + Bus","Sri Ayyappa Swamy","Season: Nov-Jan Only, 41 Days Vratham","4.9"],
+"Padmanabhaswamy":[650,1500,550,500,800,"30°C Hot, Best Oct-Mar","Trivandrum Exp","Sri Padmanabhaswamy - Vishnu","Darshan: 3:30 AM - 12 PM, 5 PM - 7:20 PM, Dress Code Must","4.9"],
+"Kukke Subramanya":[450,1100,450,500,600,"25°C Cool, Best Oct-Mar","Subramanya Road","Sri Subramanya Swamy","Darshan: 6 AM - 8 PM, Sarpa Samskara Famous","4.8"],
+"Dharmasthala":[450,1000,300,400,500,"24°C Cool, Best Oct-Mar","Dharmasthala Bus","Sri Manjunatha Swamy - Free Annadanam","Darshan: 6 AM - 8:30 PM, Free Food","4.9"],
+"Udupi Krishna":[500,1200,450,400,500,"29°C Humid, Best Oct-Mar","Udupi Station","Sri Krishna - Udupi","Darshan: 5 AM - 9 PM","4.8"],
+"Sringeri":[450,900,400,400,400,"24°C Cool, Best Oct-Mar","Sringeri Bus","Sri Sharadamba - Adi Shankaracharya","Darshan: 6 AM - 8 PM","4.7"],
+"Murudeshwar":[500,1400,500,500,600,"29°C Beach, Best Oct-Mar","Murudeshwar Station","Sri Murudeshwara - Shiva - Tallest Statue","Darshan: 6 AM - 8 PM","4.8"],
+"Kashi Vishwanath":[1400,1300,500,500,800,"20°C Pleasant, Best Oct-Mar","Kashi Exp Daily","Sri Kashi Vishwanath - Jyotirlingam","Darshan: 3 AM - 11 PM, Ganga Aarti 7 PM","4.9"],
+"Ayodhya Ram Mandir":[1500,1500,550,600,1000,"22°C Pleasant, Best Oct-Mar","Ayodhya Exp","Sri Ram Lalla - Ram Mandir","Darshan: 6:30 AM - 9:30 PM, Free Entry","5.0"],
+"Mathura - Vrindavan":[1600,1300,550,600,800,"22°C Pleasant, Best Oct-Mar","Mathura Exp","Sri Krishna Janmabhoomi + Banke Bihari","Darshan: 5 AM - 9 PM","4.9"],
+"Ujjain Mahakal":[1300,1200,500,500,800,"26°C Hot, Best Oct-Mar","Ujjain Exp","Sri Mahakaleshwar - Jyotirlingam","Darshan: 4 AM - 11 PM, Bhasma Aarti 4 AM","4.9"],
+"Omkareshwar":[1300,1000,450,400,600,"27°C Hot, Best Oct-Mar","Khandwa + Bus","Sri Omkareshwar - Jyotirlingam","Darshan: 5 AM - 9:30 PM","4.8"],
+"Somnath":[1400,1300,550,600,800,"28°C Hot, Best Oct-Mar","Somnath Exp","Sri Somnath - First Jyotirlingam","Darshan: 6 AM - 9 PM, Light Show 8 PM","4.9"],
+"Dwarka":[1500,1300,550,600,800,"29°C Hot, Best Oct-Mar","Dwarka Exp","Sri Dwarkadhish - Krishna","Darshan: 6:30 AM - 9:30 PM","4.9"],
+"Shirdi Sai Baba":[1100,1300,500,500,800,"27°C Pleasant, Best Oct-Mar","Sainagar Shirdi Exp","Sri Sai Baba","Darshan: 4 AM - 11 PM, Kakad Aarti 4:30 AM","4.9"],
+"Pandharpur Vitthal":[1000,1000,450,400,500,"28°C Hot, Best Jun-Jul Ashadi","Pandharpur Station","Sri Vitthal Rukmini","Darshan: 4 AM - 10 PM","4.8"],
+"Kolhapur Mahalaxmi":[900,1200,500,400,600,"27°C Pleasant, Best Oct-Mar","Kolhapur Exp","Sri Mahalaxmi Amman - Shakti Peetham","Darshan: 6 AM - 9 PM","4.8"],
+"Puri Jagannath":[1100,1300,500,400,800,"29°C Hot, Best Oct-Feb","Puri Exp Daily","Sri Jagannath - Balabhadra - Subhadra","Darshan: 6 AM - 9 PM, Rath Yatra June-July","4.9"],
+"Kamakhya":[1900,1400,600,600,800,"22°C Pleasant, Best Oct-Apr","Guwahati Exp","Sri Kamakhya Devi - Shakti Peetham","Darshan: 8 AM - 1 PM, 2:30 PM - 5:30 PM","4.8"],
+"Vaishno Devi":[2100,1500,600,800,1000,"12°C Cold, Best Mar-Oct","Jammu + Trek 13 KM","Sri Vaishno Devi Mata","Yatra: 24 Hrs Open, Trek / Helicopter","4.9"],
+"Amarnath":[2400,2000,700,1000,1500,"5°C Very Cold, Best Jul-Aug Only","Jammu + Trek","Sri Amarnath - Ice Lingam","Yatra: Jul-Aug Only, 45 Days","4.9"],
+"Golden Temple":[2100,1400,400,500,500,"15°C Cold, Best Oct-Mar","Amritsar Exp","Sri Harmandir Sahib - Golden Temple","Darshan: 24 Hrs, Free Langar","4.9"]
+};
+let sel="Tirupati",last=0;
+function render(){let b=document.getElementById('places');b.innerHTML="";Object.keys(D).forEach(k=>{let d=document.createElement('div');d.className='p'+(k==sel?' on':'');d.innerHTML="🛕<br>"+k;d.onclick=()=>{sel=k;render();auto()};b.appendChild(d)});document.getElementById('deity').innerHTML="🙏 "+D[sel][7]+" | ⭐ "+D[sel][9]+" / 5 | 🕉️ "+D[sel][8]}
+function members(){let n=+document.getElementById('people').value||2,m=document.getElementById('mem');m.innerHTML="";for(let i=0;i<n;i++)m.innerHTML+='<input class="mn" value="'+(i==0?'Rakesh':'Family '+(i+1))+'" style="margin-top:5px">'}
+function auto(){let f=document.getElementById('from').value,mode=document.getElementById('mode').value,dist=D[sel][0];if(f=="Hyderabad")dist=Math.max(120,dist-300);if(f=="Bangalore")dist=Math.max(120,dist-150);if(f=="Delhi")dist=Math.max(200,Math.abs(dist-1700));if(f=="Vijayawada")dist=Math.max(120,Math.abs(dist-400));
+let t=mode=="train"?Math.round(dist*0.55+80):mode=="ac"?Math.round(dist*1.4+120):mode=="bus"?Math.round(dist*1.4+80):Math.round(1500+dist*2.2);
 document.getElementById('ticket').value=t;document.getElementById('room').value=D[sel][1];document.getElementById('food').value=D[sel][2];document.getElementById('local').value=D[sel][3];document.getElementById('extra').value=D[sel][4]}
 function fmt(n){return"Rs."+n.toLocaleString('en-IN')}
 function plan(){let days=+document.getElementById('days').value,pe=+document.getElementById('people').value||1,t=+document.getElementById('ticket').value,r=+document.getElementById('room').value,fo=+document.getElementById('food').value,lo=+document.getElementById('local').value,ex=+document.getElementById('extra').value;
 let nights=Math.max(days-1,1),rooms=Math.ceil(pe/2),tt=t*pe*2,rt=r*nights*rooms,ft=fo*pe*days,lt=lo*days,sub=tt+rt+ft+lt+ex,misc=Math.round(sub*.1),grand=sub+misc;last=grand;
 let d=new Date(document.getElementById('date').value||new Date());
-document.getElementById('title').innerText=document.getElementById('from').value+" ➡️ "+sel+" 🎉";
-document.getElementById('meta').innerText="⭐ "+D[sel][8]+" | "+days+" Days | "+nights+" Nights | "+pe+" Members | "+rooms+" Room";
+document.getElementById('title').innerText=document.getElementById('from').value+" ➡️ "+sel+" 🙏";
+document.getElementById('meta').innerText="⭐ "+D[sel][9]+" | "+days+" Days | "+nights+" Nights | "+pe+" Members | "+rooms+" Room";
+document.getElementById('templeInfo').innerHTML="<b>🛕 Deity:</b> "+D[sel][7]+"<br><b>🕉️ Darshan Timing:</b> "+D[sel][8]+"<br><b>⭐ Rating:</b> "+D[sel][9]+" / 5";
 document.getElementById('weather').innerText="🌡️ "+D[sel][5];
-document.getElementById('photo').src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800";
-document.getElementById('break').innerHTML=`<div class="card">🎟️ Tickets: ${fmt(tt)}<br>🏨 Room: ${fmt(rt)}<br>🍔 Food: ${fmt(ft)}<br>🛺 Local: ${fmt(lt)}<br>🎡 Extra: ${fmt(ex)}<br>🧳 Misc: ${fmt(misc)}</div>`;
-document.getElementById('total').innerText="TOTAL: "+fmt(grand)+" | Per Person: "+fmt(Math.round(grand/pe));
-let items=[["🎟️ Tickets",tt,"#FF4081"],["🏨 Room",rt,"#FF9100"],["🍔 Food",ft,"#00C853"],["🛺 Local",lt,"#2979FF"],["🎡 Extra",ex,"#AA00FF"]];document.getElementById('bars').innerHTML=items.map(it=>`<div style="font-size:12px;font-weight:bold">${it[0]} ${fmt(it[1])} (${Math.round(it[1]/grand*100)}%)<div style="height:12px;background:#eee;border-radius:10px;overflow:hidden"><div style="height:100%;width:${Math.round(it[1]/grand*100)}%;background:${it[2]}"></div></div></div>`).join("");
-let names=[...document.querySelectorAll('.mn')].map(e=>e.value||"Friend");document.getElementById('split').innerHTML=names.map(n=>`<div class="card">👤 ${n} : <b>${fmt(Math.round(grand/pe))}</b></div>`).join("");
-let ph="";for(let i=0;i<days;i++){let dd=new Date(d);dd.setDate(dd.getDate()+i);ph+=`<div class="card"><b>📅 ${dd.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} Day ${i+1}:</b> ${sel} Sightseeing - Food - Shopping 🎉</div>`}document.getElementById('planTxt').innerHTML=ph;
-document.getElementById('train').innerText="🚂 "+D[sel][6]+" | Ticket "+fmt(t);
-let packs=["👕 Clothes","🔌 Charger","🪪 ID Proof","💧 Water Bottle","💊 Medicines","🕶️ Sunglasses","💰 Cash + UPI","👟 Shoes","📸 Camera"];if(sel=="Manali"||sel=="Kashmir")packs.push("🧥 Jacket","🧤 Gloves");
-document.getElementById('pack').innerHTML=packs.map(p=>`<div class="check"><input type="checkbox" onchange="upd()"> ${p}</div>`).join("");document.getElementById('prog').innerText="0 / "+packs.length+" packed";
-document.getElementById('map').src="https://maps.google.com/maps?q="+encodeURIComponent(sel+" India")+"&output=embed";
+document.getElementById('photo').src="https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=800";
+document.getElementById('break').innerHTML=`<div class="card">🎟️ Tickets: ${fmt(t)} x ${pe} x 2 = <b>${fmt(tt)}</b><br>🏨 Room: ${fmt(r)} x ${nights} x ${rooms} = <b>${fmt(rt)}</b><br>🍔 Food: ${fmt(fo)} x ${pe} x ${days} = <b>${fmt(ft)}</b><br>🛺 Local: ${fmt(lo)} x ${days} = <b>${fmt(lt)}</b><br>🎁 Prasadam / Donation: <b>${fmt(ex)}</b><br>🧳 Misc 10%: <b>${fmt(misc)}</b></div>`;
+document.getElementById('total').innerText="TOTAL YATRA: "+fmt(grand)+" | Per Person: "+fmt(Math.round(grand/pe));
+let items=[["🎟️ Tickets",tt,"#FF5722"],["🏨 Room",rt,"#FF9800"],["🍔 Food",ft,"#4CAF50"],["🛺 Local",lt,"#2196F3"],["🎁 Extra",ex,"#9C27B0"]];document.getElementById('bars').innerHTML=items.map(it=>`<div style="font-size:12px;font-weight:bold">${it[0]} ${fmt(it[1])} (${Math.round(it[1]/grand*100)}%)<div style="height:12px;background:#eee;border-radius:10px;overflow:hidden"><div style="height:100%;width:${Math.round(it[1]/grand*100)}%;background:${it[2]}"></div></div></div>`).join("");
+let names=[...document.querySelectorAll('.mn')].map(e=>e.value||"Family");document.getElementById('split').innerHTML=names.map(n=>`<div class="card">👤 ${n} : <b>${fmt(Math.round(grand/pe))}</b></div>`).join("");
+let ph="";for(let i=0;i<days;i++){let dd=new Date(d);dd.setDate(dd.getDate()+i);ph+=`<div class="card"><b>📅 ${dd.toLocaleDateString('en-IN',{day:'numeric',month:'short'})} Day ${i+1}:</b> ${sel} - Morning Darshan, Evening Aarti, Prasadam - 🙏</div>`}document.getElementById('planTxt').innerHTML=ph;
+document.getElementById('train').innerText="🚂 "+D[sel][6]+" | Ticket "+fmt(t)+" | IRCTC lo 60 days mundhu book chey";
+document.getElementById('hotel').innerText="🏨 "+sel+" lo Room: "+fmt(D[sel][1])+" / Night | Temple daggara / Devasthanam Rooms kuda untayi - mundhu book chesuko";
+let packs=["👕 Traditional Dress - Dhoti / Saree","🪪 ID Proof - Aadhar","💧 Water Bottle","💊 Medicines","🕶️ Sunglasses","💰 Cash + UPI - Donation kosam","👟 Slippers Bag - Temple lo","🧴 Coconut / Flowers - Prasadam kosam","📸 Camera","📿 Mala / Kumkum"];document.getElementById('pack').innerHTML=packs.map(p=>`<div class="check"><input type="checkbox" onchange="upd()"> ${p}</div>`).join("");document.getElementById('prog').innerText="0 / "+packs.length+" packed";
+document.getElementById('map').src="https://maps.google.com/maps?q="+encodeURIComponent(sel+" Temple India")+"&output=embed";
 document.getElementById('res').style.display="block";document.getElementById('res').scrollIntoView({behavior:'smooth'});
-// Confetti
-for(let i=0;i<40;i++){let s=document.createElement('div');s.innerText=["🎉","🌈","⭐","💖","✨"][i%5];s.style.cssText="position:fixed;top:-20px;left:"+(Math.random()*100)+"%;font-size:22px;z-index:999;transition:3s";document.body.appendChild(s);setTimeout(()=>{s.style.top="100%";s.style.transform="rotate(360deg)"},50);setTimeout(()=>s.remove(),3200)}}
-function upd(){let a=[...document.querySelectorAll('#pack input')],d=a.filter(c=>c.checked).length;document.getElementById('prog').innerText=d+" / "+a.length+" packed"+(d==a.length?" 🎉 Full Ready!":"")}
-function hotel(){window.open("https://www.makemytrip.com/hotels/hotel-listing/?searchText="+encodeURIComponent(sel),"_blank")}
-function share(){let t="Trip: "+document.getElementById('from').value+" to "+sel+" Total "+fmt(last)+" Made by Muthyala Rakesh 🌈";window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
+for(let i=0;i<30;i++){let s=document.createElement('div');s.innerText=["🛕","🙏","🌸","🪔","⭐"][i%5];s.style.cssText="position:fixed;top:-20px;left:"+(Math.random()*100)+"%;font-size:22px;z-index:999;transition:3s";document.body.appendChild(s);setTimeout(()=>{s.style.top="100%"},50);setTimeout(()=>s.remove(),3200)}}
+function upd(){let a=[...document.querySelectorAll('#pack input')],d=a.filter(c=>c.checked).length;document.getElementById('prog').innerText=d+" / "+a.length+" packed"+(d==a.length?" 🙏 Full Ready!":"")}
+function hotel(){window.open("https://www.makemytrip.com/hotels/hotel-listing/?searchText="+encodeURIComponent(sel+" temple"),"_blank")}
+function share(){let t="Temple Yatra: "+document.getElementById('from').value+" to "+sel+" ("+D[sel][7]+") Total "+fmt(last)+" - Made by Muthyala Rakesh 🛕";window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank")}
 render();members();auto();
 </script></body></html>
