@@ -1,210 +1,232 @@
 <!DOCTYPE html>
 <html lang="te">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ట్రిప్ ప్లానర్</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@400;500;700;800&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Planner - All India</title>
 <style>
-:root{
-  --bg:#eef2f6;
-  --surface:#ffffff;
-  --ink:#13243b;
-  --muted:#5b6b80;
-  --line:#d5dde7;
-  --accent:#0b6f6a;
-  --accent-ink:#ffffff;
-  --signal:#d9822b;
-  --display:"Anek Telugu","Noto Sans Telugu",system-ui,sans-serif;
-  --body:"Anek Telugu","Noto Sans Telugu",system-ui,sans-serif;
-  color-scheme:light;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#0e1724;--surface:#16212f;--ink:#e8eef6;--muted:#9aabbf;--line:#2b394b;
-    --accent:#3cb9b0;--accent-ink:#06201e;--signal:#f0a35a;color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0e1724;--surface:#16212f;--ink:#e8eef6;--muted:#9aabbf;--line:#2b394b;
-  --accent:#3cb9b0;--accent-ink:#06201e;--signal:#f0a35a;color-scheme:dark;
-}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
-main{max-width:720px;margin:0 auto;padding:20px 16px 56px;display:flex;flex-direction:column;gap:20px}
-header h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,7vw,40px);line-height:1.15;margin:8px 0 4px;text-wrap:balance}
-header p{margin:0;color:var(--muted)}
-.rail{height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--accent) 0 18px,transparent 18px 26px);margin-top:14px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
-form{display:flex;flex-direction:column;gap:16px}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-@media(max-width:480px){.row{grid-template-columns:1fr}}
-label,.lbl{display:block;font-weight:700;font-size:14px;margin-bottom:4px}
-input[type=text],input[type=number]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
-input:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.chips{display:flex;flex-wrap:wrap;gap:8px}
-.chip{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
-.go{font:inherit;font-weight:800;font-size:17px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:13px 18px;cursor:pointer}
-.go[disabled]{opacity:.6;cursor:progress}
-.note{font-size:13px;color:var(--muted);margin:0}
-.err{color:#b3261e;font-weight:500}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .err{color:#ff9d94}}
-:root[data-theme="dark"] .err{color:#ff9d94}
-#out{display:flex;flex-direction:column;gap:20px}
-h2{font-family:var(--display);font-weight:800;font-size:22px;margin:0 0 10px;text-wrap:balance}
-.summary{font-size:17px}
-.train{display:flex;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
-.train:first-of-type{border-top:0}
-.train b{display:block}
-.train span{color:var(--muted);font-size:14px}
-.day{border-left:3px solid var(--accent);padding-left:14px;margin:0 0 18px}
-.day h3{margin:0 0 6px;font-size:18px;font-family:var(--display)}
-.day .d{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;font-size:13px;font-weight:700;padding:1px 8px;margin-right:8px}
-.item{display:flex;gap:10px;padding:3px 0}
-.item .t{flex:0 0 92px;color:var(--signal);font-weight:700;font-size:14px}
-@media(max-width:480px){.item{flex-direction:column;gap:0}.item .t{flex:none}}
-.b{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:8px 0;border-top:1px solid var(--line)}
-.b:first-of-type{border-top:0}
-.b .n{font-weight:500}
-.b .a{font-variant-numeric:tabular-nums;font-weight:700}
-.bar{grid-column:1/-1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
-.bar i{display:block;height:100%;background:var(--signal)}
-.total{display:flex;justify-content:space-between;font-weight:800;font-size:18px;padding-top:12px;border-top:2px solid var(--ink);margin-top:4px;font-variant-numeric:tabular-nums}
-.over{color:#b3261e}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .over{color:#ff9d94}}
-:root[data-theme="dark"] .over{color:#ff9d94}
-ul.tips{margin:0;padding-left:20px}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#FFF7ED;color:#333;padding:15px}
+h1{text-align:center;color:#EA580C;font-size:28px;margin:10px 0}
+p.sub{text-align:center;color:#666;margin-bottom:15px}
+.box{background:#fff;padding:18px;border-radius:15px;max-width:650px;margin:15px auto;box-shadow:0 2px 10px #ddd}
+h2{color:#EA580C;margin-bottom:12px;font-size:20px}
+label{font-weight:bold;display:block;margin:12px 0 5px}
+select,input{width:100%;padding:12px;border-radius:10px;border:1px solid #ccc;font-size:15px}
+button{width:100%;background:#EA580C;color:#fff;border:none;padding:13px;border-radius:10px;font-size:16px;font-weight:bold;cursor:pointer;margin-top:15px}
+button:hover{background:#C2410C}
+.row{display:flex;gap:10px}
+.row>div{flex:1}
+.card{background:#FFF7ED;padding:12px;border-radius:10px;margin-top:10px;border:1px solid #FED7AA}
+.card b{color:#EA580C}
+#result{display:none}
+.place-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px}
+.place{border:2px solid #eee;border-radius:12px;padding:8px;text-align:center;cursor:pointer;font-size:13px}
+.place.active{border-color:#EA580C;background:#FFF7ED}
+.place span{font-size:22px;display:block}
+.small{font-size:11px;color:#666}
+.total{font-size:22px;color:#EA580C;text-align:center;font-weight:bold;margin-top:10px}
+.tip{background:#FEF3C7;padding:12px;border-radius:10px;margin-top:12px;font-size:14px}
+.footer{text-align:center;margin:25px 0;font-weight:bold;color:#555}
+.footer span{color:#EA580C}
+.filter-btn{background:#fff;color:#EA580C;border:1px solid #EA580C;padding:8px 12px;border-radius:20px;font-size:13px;cursor:pointer;margin:3px;width:auto}
+.filter-btn.active{background:#EA580C;color:#fff}
 </style>
 </head>
 <body>
-<main>
-  <header>
-    <h1>ట్రిప్ ప్లానర్</h1>
-    <p>మీ ప్రయాణ వివరాలు చెప్పండి. రైలు, రోజువారీ ప్లాన్, బడ్జెట్ తయారు చేసి ఇస్తాను.</p>
-    <div class="rail" aria-hidden="true"></div>
-  </header>
 
-  <section class="card">
-    <form id="f">
-      <div class="row">
-        <div><label for="from">ఎక్కడి నుంచి</label><input type="text" id="from" value="హైదరాబాద్" required></div>
-        <div><label for="to">ఎక్కడికి</label><input type="text" id="to" value="గోవా" required></div>
-      </div>
-      <div class="row">
-        <div><label for="days">రోజులు</label><input type="number" id="days" min="1" max="10" value="3" required></div>
-        <div><label for="ppl">ఎంత మంది</label><input type="number" id="ppl" min="1" max="20" value="2" required></div>
-      </div>
-      <div><label for="budget">మొత్తం బడ్జెట్ (₹)</label><input type="number" id="budget" min="500" step="500" value="15000" required></div>
-      <div>
-        <span class="lbl" id="il">ఇష్టాలు</span>
-        <div class="chips" role="group" aria-labelledby="il" id="chips"></div>
-      </div>
-      <button class="go" id="go" type="submit">ప్లాన్ చేయి</button>
-      <p class="note" id="note">రైలు సమయాలు అంచనాలు మాత్రమే. బుక్ చేసే ముందు IRCTC లో సరిచూసుకోండి.</p>
-    </form>
-  </section>
+<h1>✈️ All India Trip Planner 🇮🇳</h1>
+<p class="sub">Kashmir nunchi Kanyakumari varaku - Anni Places!</p>
 
-  <div id="out" aria-live="polite"></div>
-</main>
+<div class="box">
+<h2>1. State / Region Select Chey</h2>
+<div style="text-align:center">
+<button class="filter-btn active" onclick="filterPlaces('all',this)">All India</button>
+<button class="filter-btn" onclick="filterPlaces('south',this)">South</button>
+<button class="filter-btn" onclick="filterPlaces('north',this)">North</button>
+<button class="filter-btn" onclick="filterPlaces('west',this)">West</button>
+<button class="filter-btn" onclick="filterPlaces('east',this)">East</button>
+<button class="filter-btn" onclick="filterPlaces('northeast',this)">North-East</button>
+</div>
+
+<h2 style="margin-top:15px">2. Place Select Chey</h2>
+<div class="place-grid" id="places"></div>
+
+<label>Enni Rojulu?</label>
+<select id="days">
+<option value="1">1 Roju</option>
+<option value="2" selected>2 Rojulu</option>
+<option value="3">3 Rojulu</option>
+<option value="4">4 Rojulu</option>
+<option value="5">5 Rojulu</option>
+<option value="7">7 Rojulu</option>
+</select>
+
+<div class="row">
+<div>
+<label>Entha Mandi?</label>
+<input type="number" id="people" value="2" min="1" max="30">
+</div>
+<div>
+<label>Budget Per Person / Roju?</label>
+<select id="budgetType">
+<option value="1000">Low - Rs.1000</option>
+<option value="2000" selected>Medium - Rs.2000</option>
+<option value="4000">High - Rs.4000</option>
+<option value="7000">Luxury - Rs.7000</option>
+</select>
+</div>
+</div>
+
+<button onclick="makePlan()">Plan Chupinchu ➡️</button>
+</div>
+
+<div class="box" id="result">
+<h2>📋 Nee Trip Plan</h2>
+<div id="planText"></div>
+<div class="total" id="totalText"></div>
+<div class="tip" id="tipText"></div>
+<button onclick="savePlan()">Plan Save Chesuko ❤️</button>
+<p id="savedMsg" style="text-align:center;color:green;margin-top:10px"></p>
+</div>
+
+<div class="box">
+<h2>🧳 Packing List</h2>
+<div id="packing"></div>
+</div>
+
+<p class="footer">Made with ❤️ by <span>Muthyala Rakesh</span> 🇮🇳</p>
 
 <script>
-const $ = id => document.getElementById(id);
-const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const inr = n => "₹" + Math.round(Number(n) || 0).toLocaleString("en-IN");
+let allPlaces = [
+{ n:"Tirupati", e:"🛕", c:"south", s:"AP" },
+{ n:"Vizag", e:"🏖️", c:"south", s:"AP" },
+{ n:"Araku", e:"⛰️", c:"south", s:"AP" },
+{ n:"Hyderabad", e:"🏙️", c:"south", s:"Telangana" },
+{ n:"Warangal", e:"🛕", c:"south", s:"Telangana" },
+{ n:"Ooty", e:"🌿", c:"south", s:"Tamil Nadu" },
+{ n:"Madurai", e:"🛕", c:"south", s:"Tamil Nadu" },
+{ n:"Chennai", e:"🏖️", c:"south", s:"Tamil Nadu" },
+{ n:"Pondicherry", e:"🌊", c:"south", s:"Pondicherry" },
+{ n:"Mysore", e:"👑", c:"south", s:"Karnataka" },
+{ n:"Coorg", e:"☕", c:"south", s:"Karnataka" },
+{ n:"Bangalore", e:"🏙️", c:"south", s:"Karnataka" },
+{ n:"Kerala - Munnar", e:"🌿", c:"south", s:"Kerala" },
+{ n:"Kochi", e:"🚢", c:"south", s:"Kerala" },
+{ n:"Alleppey", e:"🛶", c:"south", s:"Kerala" },
+{ n:"Kanyakumari", e:"🌅", c:"south", s:"Tamil Nadu" },
+{ n:"Delhi", e:"🏛️", c:"north", s:"Delhi" },
+{ n:"Agra - Taj Mahal", e:"🕌", c:"north", s:"UP" },
+{ n:"Jaipur", e:"👑", c:"north", s:"Rajasthan" },
+{ n:"Udaipur", e:"🏰", c:"north", s:"Rajasthan" },
+{ n:"Jodhpur", e:"💙", c:"north", s:"Rajasthan" },
+{ n:"Manali", e:"❄️", c:"north", s:"Himachal" },
+{ n:"Shimla", e:"🏔️", c:"north", s:"Himachal" },
+{ n:"Kashmir", e:"🌸", c:"north", s:"J&K" },
+{ n:"Leh Ladakh", e:"🏔️", c:"north", s:"Ladakh" },
+{ n:"Varanasi", e:"🛕", c:"north", s:"UP" },
+{ n:"Rishikesh", e:"🧘", c:"north", s:"Uttarakhand" },
+{ n:"Haridwar", e:"🛕", c:"north", s:"Uttarakhand" },
+{ n:"Amritsar", e:"🙏", c:"north", s:"Punjab" },
+{ n:"Mumbai", e:"🌆", c:"west", s:"Maharashtra" },
+{ n:"Pune", e:"🏙️", c:"west", s:"Maharashtra" },
+{ n:"Goa", e:"🌊", c:"west", s:"Goa" },
+{ n:"Mahabaleshwar", e:"🍓", c:"west", s:"Maharashtra" },
+{ n:"Ahmedabad", e:"🏙️", c:"west", s:"Gujarat" },
+{ n:"Rann of Kutch", e:"🏜️", c:"west", s:"Gujarat" },
+{ n:"Kolkata", e:"🌉", c:"east", s:"West Bengal" },
+{ n:"Darjeeling", e:"🍵", c:"east", s:"West Bengal" },
+{ n:"Puri", e:"🛕", c:"east", s:"Odisha" },
+{ n:"Bhubaneswar", e:"🛕", c:"east", s:"Odisha" },
+{ n:"Andaman", e:"🏝️", c:"east", s:"Andaman" },
+{ n:"Shillong", e:"🌧️", c:"northeast", s:"Meghalaya" },
+{ n:"Guwahati", e:"🛕", c:"northeast", s:"Assam" },
+{ n:"Gangtok", e:"🏔️", c:"northeast", s:"Sikkim" },
+{ n:"Tawang", e:"🏔️", c:"northeast", s:"Arunachal" },
+{ n:"Imphal", e:"🌿", c:"northeast", s:"Manipur" }
+];
 
-const interests = ["బీచ్","గుళ్లు","ట్రెక్కింగ్","ఆహారం","చరిత్ర","షాపింగ్","ప్రకృతి","విశ్రాంతి"];
-const picked = new Set(["బీచ్","ఆహారం"]);
-const chips = $("chips");
-interests.forEach(name => {
-  const b = document.createElement("button");
-  b.type = "button"; b.className = "chip"; b.textContent = name;
-  b.setAttribute("aria-pressed", picked.has(name));
-  b.onclick = () => {
-    picked.has(name) ? picked.delete(name) : picked.add(name);
-    b.setAttribute("aria-pressed", picked.has(name));
-  };
-  chips.appendChild(b);
-});
+let selected = "Vizag";
+let currentFilter = "all";
 
-let sample = null;
-try {
-  if (window.claude && claude.use) {
-    claude.use("sample").then(s => {
-      sample = s;
-      if (!s) $("note").innerHTML = '<span class="err">AI ఇక్కడ అందుబాటులో లేదు. Claude లో ఈ పేజీని తెరవండి.</span>';
-    }).catch(() => {});
-  }
-} catch (e) {}
-
-function parseJSON(text) {
-  const t = String(text).replace(/```json|```/g, "");
-  const a = t.indexOf("{"), z = t.lastIndexOf("}");
-  if (a < 0 || z < 0) throw new Error("bad");
-  return JSON.parse(t.slice(a, z + 1));
+function renderPlaces(){
+  let box = document.getElementById('places');
+  box.innerHTML = "";
+  let list = allPlaces.filter(p => currentFilter==="all" || p.c===currentFilter);
+  list.forEach(p=>{
+    let div = document.createElement('div');
+    div.className = 'place' + (p.n===selected ? ' active' : '');
+    div.innerHTML = '<span>'+p.e+'</span><b>'+p.n+'</b><div class="small">'+p.s+'</div>';
+    div.onclick = function(){ selectPlace(p.n); };
+    box.appendChild(div);
+  });
+}
+function filterPlaces(cat, btn){
+  currentFilter = cat;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPlaces();
+}
+function selectPlace(name){
+  selected = name;
+  renderPlaces();
+  updatePacking();
 }
 
-function render(p, budget) {
-  const trains = (p.trains || []).map(t =>
-    `<div class="train"><div><b>${esc(t.name)}</b><span>${esc(t.note)}</span></div></div>`).join("");
-  const days = (p.days || []).map((d, i) => `
-    <div class="day"><h3><span class="d">రోజు ${i + 1}</span>${esc(d.title)}</h3>
-    ${(d.items || []).map(it => `<div class="item"><span class="t">${esc(it.time)}</span><span>${esc(it.text)}</span></div>`).join("")}
-    </div>`).join("");
-  const rows = p.budget || [];
-  const total = rows.reduce((s, r) => s + (Number(r.amount) || 0), 0);
-  const max = Math.max(1, ...rows.map(r => Number(r.amount) || 0));
-  const bud = rows.map(r => `
-    <div class="b"><span class="n">${esc(r.item)}</span><span class="a">${inr(r.amount)}</span>
-    <div class="bar"><i style="width:${Math.round((Number(r.amount) || 0) / max * 100)}%"></i></div></div>`).join("");
-  const diff = budget - total;
-  const tips = (p.tips || []).map(t => `<li>${esc(t)}</li>`).join("");
-  $("out").innerHTML = `
-    <section class="card"><h2>${esc(p.title || "మీ ట్రిప్")}</h2><p class="summary">${esc(p.summary)}</p></section>
-    <section class="card"><h2>రైలు ఎంపికలు</h2>${trains}</section>
-    <section class="card"><h2>రోజువారీ ప్లాన్</h2>${days}</section>
-    <section class="card"><h2>బడ్జెట్</h2>${bud}
-      <div class="total"><span>మొత్తం</span><span class="${diff < 0 ? "over" : ""}">${inr(total)}</span></div>
-      <p class="note">${diff >= 0 ? "బడ్జెట్‌లో మిగిలేది: " + inr(diff) : "బడ్జెట్ కంటే ఎక్కువ: " + inr(-diff)}</p></section>
-    ${tips ? `<section class="card"><h2>సూచనలు</h2><ul class="tips">${tips}</ul></section>` : ""}`;
+let plans = {
+"Vizag": ["Day 1: RK Beach - Kailasagiri - Submarine Museum","Day 2: Araku Train / Borra Caves","Day 3: Yarada Beach - Rushikonda - Shopping","Day 4: Simhachalam - Zoo Park","Day 5: Beach Sunrise - Return","Day 6: Extra Beach Day","Day 7: Shopping - Return"],
+"Tirupati": ["Day 1: Tirumala Darshan - Padmavathi Temple","Day 2: Kapila Theertham - Shopping","Day 3: Sri Kalahasti - Return","Day 4: Papavinasanam - Relax","Day 5: Extra Darshan","Day 6: Local Temples","Day 7: Return"],
+"Goa": ["Day 1: Baga Beach - Calangute","Day 2: North Goa - Fort Aguada - Water Sports","Day 3: South Goa - Palolem - Churches","Day 4: Cruise - Casino - Night Market","Day 5: Beach Sunrise - Return","Day 6: Dudhsagar Falls","Day 7: Shopping - Return"],
+"Delhi": ["Day 1: India Gate - Red Fort - Connaught Place","Day 2: Qutub Minar - Lotus Temple - Humayun Tomb","Day 3: Akshardham - Chandni Chowk Food","Day 4: Delhi Shopping - Sarojini Nagar","Day 5: Agra Day Trip - Taj Mahal","Day 6: Gurgaon - Cyber Hub","Day 7: Return"],
+"Agra - Taj Mahal": ["Day 1: Taj Mahal Sunrise - Agra Fort","Day 2: Mehtab Bagh - Local Food","Day 3: Fatehpur Sikri - Return","Day 4: Delhi Day Trip","Day 5: Shopping - Return","Day 6: Yamuna View - Relax","Day 7: Return"],
+"Jaipur": ["Day 1: Hawa Mahal - City Palace","Day 2: Amber Fort - Jaigarh - Nahargarh","Day 3: Jantar Mantar - Shopping - Bapu Bazaar","Day 4: Jal Mahal - Birla Temple","Day 5: Chokhi Dhani - Return","Day 6: Ajmer - Pushkar Trip","Day 7: Return"],
+"Manali": ["Day 1: Mall Road - Hadimba Temple","Day 2: Solang Valley - Paragliding","Day 3: Rohtang Pass - Snow Point","Day 4: Old Manali - Cafe Hopping","Day 5: Kullu - River Rafting","Day 6: Jogini Falls - Trek","Day 7: Return"],
+"Kashmir": ["Day 1: Srinagar - Dal Lake Shikara Ride","Day 2: Gulmarg - Snow Activities","Day 3: Pahalgam - Betaab Valley","Day 4: Sonmarg - Thajiwas Glacier","Day 5: Srinagar Shopping - Lal Chowk","Day 6: Doodhpathri","Day 7: Return"],
+"Leh Ladakh": ["Day 1: Leh Arrival - Rest - Leh Market","Day 2: Pangong Lake","Day 3: Nubra Valley - Khardung La","Day 4: Magnetic Hill - Gurudwara","Day 5: Tso Moriri Lake","Day 6: Leh Palace - Shanti Stupa","Day 7: Return"],
+"Mumbai": ["Day 1: Gateway of India - Marine Drive","Day 2: Juhu Beach - Bandra - Bandstand","Day 3: Elephanta Caves - Ferry","Day 4: Shopping - Linking Road - Street Food","Day 5: Film City Tour","Day 6: Lonavala Day Trip","Day 7: Return"],
+"Kerala - Munnar": ["Day 1: Tea Gardens - Mattupetty Dam","Day 2: Eravikulam National Park - Top Station","Day 3: Tea Museum - Blossom Park","Day 4: Thekkady - Spice Plantation","Day 5: Alleppey Houseboat","Day 6: Kochi - Fort Kochi","Day 7: Return"],
+"Kolkata": ["Day 1: Howrah Bridge - Victoria Memorial","Day 2: Dakshineswar - Belur Math","Day 3: Park Street Food - Shopping","Day 4: Eco Park - Science City","Day 5: Darjeeling Day Trip Plan","Day 6: Local Street Food Tour","Day 7: Return"],
+"Darjeeling": ["Day 1: Toy Train - Mall Road","Day 2: Tiger Hill Sunrise - Batasia Loop","Day 3: Tea Gardens - Peace Pagoda","Day 4: Rock Garden - Zoo","Day 5: Kalimpong Trip","Day 6: Local Shopping","Day 7: Return"],
+"Varanasi": ["Day 1: Ganga Aarti - Dashashwamedh Ghat","Day 2: Kashi Vishwanath Temple - Boat Ride","Day 3: Sarnath - Buddhist Temples","Day 4: Banarasi Food - Shopping","Day 5: Allahabad Trip","Day 6: Morning Boat - Temples","Day 7: Return"],
+"Shillong": ["Day 1: Shillong City - Ward's Lake","Day 2: Cherrapunji - Living Root Bridge","Day 3: Dawki - Umngot River - Mawlynnong","Day 4: Elephant Falls - Shillong Peak","Day 5: Laitlum Canyons","Day 6: Local Cafe - Shopping","Day 7: Return"],
+"Andaman": ["Day 1: Port Blair - Cellular Jail","Day 2: Havelock - Radhanagar Beach","Day 3: Scuba Diving - Snorkeling","Day 4: Neil Island - Natural Bridge","Day 5: Ross Island - North Bay","Day 6: Beach Relax","Day 7: Return"]
+};
+
+function getPlan(place, day){
+  if(plans[place] && plans[place][day]) return plans[place][day];
+  return "Day "+(day+1)+": "+place+" Local Sightseeing - Food - Shopping - Relax";
 }
 
-$("f").addEventListener("submit", async e => {
-  e.preventDefault();
-  if (!sample) { $("note").innerHTML = '<span class="err">AI అందుబాటులో లేదు.</span>'; return; }
-  const v = {
-    from: $("from").value.trim(), to: $("to").value.trim(),
-    days: +$("days").value, ppl: +$("ppl").value, budget: +$("budget").value,
-    likes: [...picked].join(", ") || "ఏదైనా"
-  };
-  const go = $("go");
-  go.disabled = true; go.textContent = "ప్లాన్ తయారవుతోంది...";
-  $("note").textContent = "ఇది 20-40 సెకన్లు పట్టవచ్చు.";
-  const prompt = `You are an expert India travel planner. Plan a trip for these inputs and reply with ONLY one JSON object, no other text.
-From: ${v.from}. To: ${v.to}. Days: ${v.days}. Travellers: ${v.ppl}. Total budget for everyone: INR ${v.budget}. Interests: ${v.likes}.
-Write all text values in simple Telugu (Telugu script). Keep place names and train names recognisable (Telugu script is fine, keep train numbers in digits).
-Prefer Indian Railways. Use realistic 2026 prices in INR for the whole group. Say clearly in each train note that timings and fares are approximate.
-JSON shape:
-{"title":string,"summary":string (2 sentences),
-"trains":[{"name":"train name and number","note":"departure/arrival, class, approx fare per person"}] (2-3 options, outbound and return),
-"days":[{"title":string,"items":[{"time":"e.g. ఉదయం 8:00","text":string}]}] (exactly ${v.days} entries, 4-6 items each),
-"budget":[{"item":string,"amount":number}] (train, stay, food, local transport, activities, buffer; amounts in INR for the whole group; sum should be at or under ${v.budget}),
-"tips":[string] (3-4 short tips)}`;
-  try {
-    const r = await sample(prompt, { cache: false, modelTier: "default" });
-    render(parseJSON(r.text), v.budget);
-    $("note").textContent = "రైలు సమయాలు, ధరలు అంచనాలు మాత్రమే. బుక్ చేసే ముందు IRCTC లో సరిచూసుకోండి.";
-    $("out").scrollIntoView({ behavior: "smooth" });
-  } catch (err) {
-    const m = err && err.code === "rate_limited" ? "కొంచెం సేపటి తర్వాత మళ్ళీ ప్రయత్నించండి." : "ప్లాన్ తయారు కాలేదు. మళ్ళీ ప్రయత్నించండి.";
-    $("note").innerHTML = '<span class="err">' + m + "</span>";
-  } finally {
-    go.disabled = false; go.textContent = "ప్లాన్ చేయి";
+function makePlan(){
+  let days = parseInt(document.getElementById('days').value);
+  let people = parseInt(document.getElementById('people').value);
+  let perDay = parseInt(document.getElementById('budgetType').value);
+  if(!people || people < 1){ alert("Entha mandi ani cheppu"); return; }
+  let total = days * people * perDay;
+  let html = "<p><b>Place:</b> " + selected + " | <b>Rojulu:</b> " + days + " | <b>Mandhi:</b> " + people + "</p>";
+  for(let i=0;i<days;i++){
+    html += '<div class="card"><b>'+getPlan(selected,i)+'</b></div>';
   }
-});
+  document.getElementById('planText').innerHTML = html;
+  document.getElementById('totalText').innerText = "Total Budget: Rs." + total.toLocaleString('en-IN');
+  document.getElementById('tipText').innerText = "💡 Tip: " + selected + " ki velle mundhu train / flight tickets munduga book chesuko. ID proof, cash + UPI marchipoku. Made by Muthyala Rakesh!";
+  document.getElementById('result').style.display = "block";
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+function savePlan(){
+  let txt = document.getElementById('planText').innerText + " | " + document.getElementById('totalText').innerText;
+  localStorage.setItem('tripPlan', txt);
+  document.getElementById('savedMsg').innerText = "Save Aindi! Made by Muthyala Rakesh";
+}
+function updatePacking(){
+  let pack = "Clothes, Charger, ID Proof, Water Bottle, Snacks, Medicines, Sunglasses, Cash + UPI - " + selected + " trip ki";
+  if(selected.includes("Kashmir") || selected.includes("Manali") || selected.includes("Shimla") || selected.includes("Leh") || selected.includes("Darjeeling") || selected.includes("Gangtok")) pack = "Heavy Sweater / Jacket, Woolen Cap, Gloves, Shoes, Thermal Wear, Medicines, ID Proof - Chali ekkuva untundi!";
+  if(selected.includes("Goa") || selected.includes("Andaman") || selected.includes("Vizag") || selected.includes("Alleppey")) pack = "T-Shirts, Shorts, Sunglasses, Sunscreen, Slippers, Camera, ID Proof, Beach Dress";
+  if(selected.includes("Tirupati") || selected.includes("Varanasi") || selected.includes("Madurai") || selected.includes("Puri")) pack = "Traditional Dress, ID Proof, Temple Ticket Print, Water Bottle, Slippers Bag, Cash";
+  document.getElementById('packing').innerHTML = '<div class="card">🧳 ' + pack + '</div>';
+}
+renderPlaces();
+updatePacking();
 </script>
 </body>
 </html>
