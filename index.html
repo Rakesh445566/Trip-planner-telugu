@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="te">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ట్రిప్ ప్లానర్</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Telugu:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef2f6;
+  --surface:#ffffff;
+  --ink:#13243b;
+  --muted:#5b6b80;
+  --line:#d5dde7;
+  --accent:#0b6f6a;
+  --accent-ink:#ffffff;
+  --signal:#d9822b;
+  --display:"Anek Telugu","Noto Sans Telugu",system-ui,sans-serif;
+  --body:"Anek Telugu","Noto Sans Telugu",system-ui,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1724;--surface:#16212f;--ink:#e8eef6;--muted:#9aabbf;--line:#2b394b;
+    --accent:#3cb9b0;--accent-ink:#06201e;--signal:#f0a35a;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e1724;--surface:#16212f;--ink:#e8eef6;--muted:#9aabbf;--line:#2b394b;
+  --accent:#3cb9b0;--accent-ink:#06201e;--signal:#f0a35a;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+main{max-width:720px;margin:0 auto;padding:20px 16px 56px;display:flex;flex-direction:column;gap:20px}
+header h1{font-family:var(--display);font-weight:800;font-size:clamp(28px,7vw,40px);line-height:1.15;margin:8px 0 4px;text-wrap:balance}
+header p{margin:0;color:var(--muted)}
+.rail{height:6px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--accent) 0 18px,transparent 18px 26px);margin-top:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+form{display:flex;flex-direction:column;gap:16px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+label,.lbl{display:block;font-weight:700;font-size:14px;margin-bottom:4px}
+input[type=text],input[type=number]{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+input:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.go{font:inherit;font-weight:800;font-size:17px;background:var(--accent);color:var(--accent-ink);border:0;border-radius:10px;padding:13px 18px;cursor:pointer}
+.go[disabled]{opacity:.6;cursor:progress}
+.note{font-size:13px;color:var(--muted);margin:0}
+.err{color:#b3261e;font-weight:500}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .err{color:#ff9d94}}
+:root[data-theme="dark"] .err{color:#ff9d94}
+#out{display:flex;flex-direction:column;gap:20px}
+h2{font-family:var(--display);font-weight:800;font-size:22px;margin:0 0 10px;text-wrap:balance}
+.summary{font-size:17px}
+.train{display:flex;gap:12px;padding:10px 0;border-top:1px dashed var(--line)}
+.train:first-of-type{border-top:0}
+.train b{display:block}
+.train span{color:var(--muted);font-size:14px}
+.day{border-left:3px solid var(--accent);padding-left:14px;margin:0 0 18px}
+.day h3{margin:0 0 6px;font-size:18px;font-family:var(--display)}
+.day .d{display:inline-block;background:var(--accent);color:var(--accent-ink);border-radius:6px;font-size:13px;font-weight:700;padding:1px 8px;margin-right:8px}
+.item{display:flex;gap:10px;padding:3px 0}
+.item .t{flex:0 0 92px;color:var(--signal);font-weight:700;font-size:14px}
+@media(max-width:480px){.item{flex-direction:column;gap:0}.item .t{flex:none}}
+.b{display:grid;grid-template-columns:1fr auto;gap:2px 12px;padding:8px 0;border-top:1px solid var(--line)}
+.b:first-of-type{border-top:0}
+.b .n{font-weight:500}
+.b .a{font-variant-numeric:tabular-nums;font-weight:700}
+.bar{grid-column:1/-1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--signal)}
+.total{display:flex;justify-content:space-between;font-weight:800;font-size:18px;padding-top:12px;border-top:2px solid var(--ink);margin-top:4px;font-variant-numeric:tabular-nums}
+.over{color:#b3261e}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) .over{color:#ff9d94}}
+:root[data-theme="dark"] .over{color:#ff9d94}
+ul.tips{margin:0;padding-left:20px}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>ట్రిప్ ప్లానర్</h1>
+    <p>మీ ప్రయాణ వివరాలు చెప్పండి. రైలు, రోజువారీ ప్లాన్, బడ్జెట్ తయారు చేసి ఇస్తాను.</p>
+    <div class="rail" aria-hidden="true"></div>
+  </header>
+
+  <section class="card">
+    <form id="f">
+      <div class="row">
+        <div><label for="from">ఎక్కడి నుంచి</label><input type="text" id="from" value="హైదరాబాద్" required></div>
+        <div><label for="to">ఎక్కడికి</label><input type="text" id="to" value="గోవా" required></div>
+      </div>
+      <div class="row">
+        <div><label for="days">రోజులు</label><input type="number" id="days" min="1" max="10" value="3" required></div>
+        <div><label for="ppl">ఎంత మంది</label><input type="number" id="ppl" min="1" max="20" value="2" required></div>
+      </div>
+      <div><label for="budget">మొత్తం బడ్జెట్ (₹)</label><input type="number" id="budget" min="500" step="500" value="15000" required></div>
+      <div>
+        <span class="lbl" id="il">ఇష్టాలు</span>
+        <div class="chips" role="group" aria-labelledby="il" id="chips"></div>
+      </div>
+      <button class="go" id="go" type="submit">ప్లాన్ చేయి</button>
+      <p class="note" id="note">రైలు సమయాలు అంచనాలు మాత్రమే. బుక్ చేసే ముందు IRCTC లో సరిచూసుకోండి.</p>
+    </form>
+  </section>
+
+  <div id="out" aria-live="polite"></div>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const inr = n => "₹" + Math.round(Number(n) || 0).toLocaleString("en-IN");
+
+const interests = ["బీచ్","గుళ్లు","ట్రెక్కింగ్","ఆహారం","చరిత్ర","షాపింగ్","ప్రకృతి","విశ్రాంతి"];
+const picked = new Set(["బీచ్","ఆహారం"]);
+const chips = $("chips");
+interests.forEach(name => {
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "chip"; b.textContent = name;
+  b.setAttribute("aria-pressed", picked.has(name));
+  b.onclick = () => {
+    picked.has(name) ? picked.delete(name) : picked.add(name);
+    b.setAttribute("aria-pressed", picked.has(name));
+  };
+  chips.appendChild(b);
+});
+
+let sample = null;
+try {
+  if (window.claude && claude.use) {
+    claude.use("sample").then(s => {
+      sample = s;
+      if (!s) $("note").innerHTML = '<span class="err">AI ఇక్కడ అందుబాటులో లేదు. Claude లో ఈ పేజీని తెరవండి.</span>';
+    }).catch(() => {});
+  }
+} catch (e) {}
+
+function parseJSON(text) {
+  const t = String(text).replace(/```json|```/g, "");
+  const a = t.indexOf("{"), z = t.lastIndexOf("}");
+  if (a < 0 || z < 0) throw new Error("bad");
+  return JSON.parse(t.slice(a, z + 1));
+}
+
+function render(p, budget) {
+  const trains = (p.trains || []).map(t =>
+    `<div class="train"><div><b>${esc(t.name)}</b><span>${esc(t.note)}</span></div></div>`).join("");
+  const days = (p.days || []).map((d, i) => `
+    <div class="day"><h3><span class="d">రోజు ${i + 1}</span>${esc(d.title)}</h3>
+    ${(d.items || []).map(it => `<div class="item"><span class="t">${esc(it.time)}</span><span>${esc(it.text)}</span></div>`).join("")}
+    </div>`).join("");
+  const rows = p.budget || [];
+  const total = rows.reduce((s, r) => s + (Number(r.amount) || 0), 0);
+  const max = Math.max(1, ...rows.map(r => Number(r.amount) || 0));
+  const bud = rows.map(r => `
+    <div class="b"><span class="n">${esc(r.item)}</span><span class="a">${inr(r.amount)}</span>
+    <div class="bar"><i style="width:${Math.round((Number(r.amount) || 0) / max * 100)}%"></i></div></div>`).join("");
+  const diff = budget - total;
+  const tips = (p.tips || []).map(t => `<li>${esc(t)}</li>`).join("");
+  $("out").innerHTML = `
+    <section class="card"><h2>${esc(p.title || "మీ ట్రిప్")}</h2><p class="summary">${esc(p.summary)}</p></section>
+    <section class="card"><h2>రైలు ఎంపికలు</h2>${trains}</section>
+    <section class="card"><h2>రోజువారీ ప్లాన్</h2>${days}</section>
+    <section class="card"><h2>బడ్జెట్</h2>${bud}
+      <div class="total"><span>మొత్తం</span><span class="${diff < 0 ? "over" : ""}">${inr(total)}</span></div>
+      <p class="note">${diff >= 0 ? "బడ్జెట్‌లో మిగిలేది: " + inr(diff) : "బడ్జెట్ కంటే ఎక్కువ: " + inr(-diff)}</p></section>
+    ${tips ? `<section class="card"><h2>సూచనలు</h2><ul class="tips">${tips}</ul></section>` : ""}`;
+}
+
+$("f").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (!sample) { $("note").innerHTML = '<span class="err">AI అందుబాటులో లేదు.</span>'; return; }
+  const v = {
+    from: $("from").value.trim(), to: $("to").value.trim(),
+    days: +$("days").value, ppl: +$("ppl").value, budget: +$("budget").value,
+    likes: [...picked].join(", ") || "ఏదైనా"
+  };
+  const go = $("go");
+  go.disabled = true; go.textContent = "ప్లాన్ తయారవుతోంది...";
+  $("note").textContent = "ఇది 20-40 సెకన్లు పట్టవచ్చు.";
+  const prompt = `You are an expert India travel planner. Plan a trip for these inputs and reply with ONLY one JSON object, no other text.
+From: ${v.from}. To: ${v.to}. Days: ${v.days}. Travellers: ${v.ppl}. Total budget for everyone: INR ${v.budget}. Interests: ${v.likes}.
+Write all text values in simple Telugu (Telugu script). Keep place names and train names recognisable (Telugu script is fine, keep train numbers in digits).
+Prefer Indian Railways. Use realistic 2026 prices in INR for the whole group. Say clearly in each train note that timings and fares are approximate.
+JSON shape:
+{"title":string,"summary":string (2 sentences),
+"trains":[{"name":"train name and number","note":"departure/arrival, class, approx fare per person"}] (2-3 options, outbound and return),
+"days":[{"title":string,"items":[{"time":"e.g. ఉదయం 8:00","text":string}]}] (exactly ${v.days} entries, 4-6 items each),
+"budget":[{"item":string,"amount":number}] (train, stay, food, local transport, activities, buffer; amounts in INR for the whole group; sum should be at or under ${v.budget}),
+"tips":[string] (3-4 short tips)}`;
+  try {
+    const r = await sample(prompt, { cache: false, modelTier: "default" });
+    render(parseJSON(r.text), v.budget);
+    $("note").textContent = "రైలు సమయాలు, ధరలు అంచనాలు మాత్రమే. బుక్ చేసే ముందు IRCTC లో సరిచూసుకోండి.";
+    $("out").scrollIntoView({ behavior: "smooth" });
+  } catch (err) {
+    const m = err && err.code === "rate_limited" ? "కొంచెం సేపటి తర్వాత మళ్ళీ ప్రయత్నించండి." : "ప్లాన్ తయారు కాలేదు. మళ్ళీ ప్రయత్నించండి.";
+    $("note").innerHTML = '<span class="err">' + m + "</span>";
+  } finally {
+    go.disabled = false; go.textContent = "ప్లాన్ చేయి";
+  }
+});
+</script>
+</body>
+</html>
