@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Trip Planner - Full Budget</title>
+<title>Trip Planner - Real Price Auto</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#FFF7ED;color:#333;padding:15px}
-h1{text-align:center;color:#EA580C;font-size:26px;margin:10px 0}
+h1{text-align:center;color:#EA580C;font-size:24px;margin:10px 0}
 p.sub{text-align:center;color:#666;margin-bottom:15px}
 .box{background:#fff;padding:18px;border-radius:15px;max-width:650px;margin:15px auto;box-shadow:0 2px 10px #ddd}
 h2{color:#EA580C;margin-bottom:12px;font-size:19px}
@@ -23,7 +23,6 @@ button:hover{background:#C2410C}
 .place{border:2px solid #eee;border-radius:12px;padding:8px;text-align:center;cursor:pointer;font-size:13px}
 .place.active{border-color:#EA580C;background:#FFF7ED}
 .place span{font-size:22px;display:block}
-.small{font-size:11px;color:#666}
 .total{font-size:22px;color:#EA580C;text-align:center;font-weight:bold;margin-top:12px}
 .tip{background:#FEF3C7;padding:12px;border-radius:10px;margin-top:12px;font-size:14px}
 .footer{text-align:center;margin:25px 0;font-weight:bold;color:#555}.footer span{color:#EA580C}
@@ -36,19 +35,29 @@ td:last-child,th:last-child{text-align:right}
 .bar{height:14px;border-radius:10px;background:#eee;margin:4px 0;overflow:hidden}
 .bar-fill{height:100%;background:#EA580C}
 .badge{display:inline-block;background:#DCFCE7;color:#166534;padding:4px 10px;border-radius:20px;font-size:12px;font-weight:bold}
+.auto{background:#ECFDF5;border:1px solid #A7F3D0;padding:10px;border-radius:10px;font-size:13px;margin-top:8px}
 </style>
 </head>
 <body>
 
-<h1>✈️ All India Trip Planner 🇮🇳</h1>
-<p class="sub">Details Ivu - Full Budget Chupistha!</p>
+<h1>✈️ Trip Planner - Real Price Auto 🇮🇳</h1>
+<p class="sub">Place select chesthe - Original Prices Auto Vasthayi!</p>
 
 <div class="box">
-<h2>1. Ekkada Nunchi? Ekkadiki?</h2>
-<label>Neeku Ekkada Nunchi? (Starting Place)</label>
-<input type="text" id="fromPlace" placeholder="Ex: Anantapur, Hyderabad, Vizag..." value="Anantapur">
+<h2>1. Trip Details</h2>
+<label>Nee Place (From)</label>
+<select id="fromPlace" onchange="autoCalc()">
+<option value="Anantapur">Anantapur</option>
+<option value="Hyderabad">Hyderabad</option>
+<option value="Vizag">Vizag / Visakhapatnam</option>
+<option value="Vijayawada">Vijayawada</option>
+<option value="Bangalore">Bangalore</option>
+<option value="Chennai">Chennai</option>
+<option value="Delhi">Delhi</option>
+<option value="Mumbai">Mumbai</option>
+</select>
 
-<label>Region Select Chey</label>
+<label>Region</label>
 <div style="text-align:center">
 <button class="filter-btn active" onclick="filterPlaces('all',this)">All</button>
 <button class="filter-btn" onclick="filterPlaces('south',this)">South</button>
@@ -58,49 +67,40 @@ td:last-child,th:last-child{text-align:right}
 <button class="filter-btn" onclick="filterPlaces('northeast',this)">North-East</button>
 </div>
 
-<label style="margin-top:12px">Place Select Chey</label>
+<label style="margin-top:12px">Ekkadiki Velthunnav?</label>
 <div class="place-grid" id="places"></div>
 
+<div class="auto" id="autoInfo">📍 Distance + Prices auto calculate avuthunnayi...</div>
+
 <div class="row">
-<div><label>Enni Rojulu?</label>
-<select id="days"><option value="1">1 Roju</option><option value="2" selected>2 Rojulu</option><option value="3">3 Rojulu</option><option value="4">4 Rojulu</option><option value="5">5 Rojulu</option><option value="7">7 Rojulu</option></select></div>
+<div><label>Enni Rojulu?</label><select id="days"><option value="1">1 Roju</option><option value="2" selected>2 Rojulu</option><option value="3">3 Rojulu</option><option value="4">4 Rojulu</option><option value="5">5 Rojulu</option><option value="7">7 Rojulu</option></select></div>
 <div><label>Entha Mandi?</label><input type="number" id="people" value="2" min="1" max="30"></div>
 </div>
 
-<h2 style="margin-top:18px">2. Travel Details</h2>
-<label>Travel Ela? (Up & Down)</label>
-<select id="travelMode" onchange="updateTravelPrice()">
-<option value="train_sleeper">🚂 Train - Sleeper</option>
-<option value="train_ac">🚂 Train - AC 3rd</option>
-<option value="bus">🚌 Bus - Sleeper</option>
-<option value="flight">✈️ Flight</option>
-<option value="bike">🏍️ Bike / Car - Petrol</option>
+<h2 style="margin-top:18px">2. Auto Prices - Nuvvu Marchukovachu</h2>
+<label>🚂 Travel Mode</label>
+<select id="travelMode" onchange="autoCalc()">
+<option value="train_sleeper">Train - Sleeper</option>
+<option value="train_ac">Train - AC 3rd</option>
+<option value="bus">Bus - Sleeper / AC</option>
+<option value="flight">Flight</option>
+<option value="bike">Bike / Car - Petrol (Per Person Share)</option>
 </select>
 
-<label>Ticket Price - 1 Person - One Side (Rs.) - Nee Istam Marchuko</label>
-<input type="number" id="ticketPrice" value="500" min="0">
+<label>🎟️ Ticket Price - 1 Person - One Side (Auto)</label>
+<input type="number" id="ticketPrice" value="500">
 
-<label>Room - 1 Night Ki Entha? (Rs.)</label>
-<select id="roomType" onchange="updateRoomPrice()">
-<option value="800">Budget Room - Rs.800 / Night</option>
-<option value="1500" selected>Medium Room - Rs.1500 / Night</option>
-<option value="3000">Good Hotel - Rs.3000 / Night</option>
-<option value="5000">Luxury - Rs.5000 / Night</option>
-</select>
+<label>🏨 Room Price - 1 Night (Auto - Aa City Rate)</label>
+<input type="number" id="roomPrice" value="1500">
 
-<label>Food - 1 Person - 1 Roju Ki Entha?</label>
-<select id="foodPrice">
-<option value="300">Low - Rs.300 (Street Food)</option>
-<option value="600" selected>Medium - Rs.600</option>
-<option value="1000">Good - Rs.1000</option>
-<option value="1500">Luxury - Rs.1500</option>
-</select>
+<label>🍔 Food - 1 Person - 1 Roju (Auto)</label>
+<input type="number" id="foodPrice" value="600">
 
-<label>Local Travel - Auto / Cab / Scooty - 1 Roju Ki?</label>
-<input type="number" id="localPrice" value="500" min="0">
+<label>🛺 Local Travel - 1 Roju (Auto)</label>
+<input type="number" id="localPrice" value="500">
 
-<label>Activities / Entry Tickets / Shopping - Total?</label>
-<input type="number" id="extraPrice" value="1000" min="0">
+<label>🎡 Activities / Entry - Total (Auto)</label>
+<input type="number" id="extraPrice" value="1000">
 
 <button onclick="makePlan()">Full Budget Chupinchu ➡️</button>
 </div>
@@ -110,67 +110,92 @@ td:last-child,th:last-child{text-align:right}
 <p id="tripMeta"></p>
 <span class="badge" id="budgetBadge"></span>
 
-<h2 style="margin-top:15px">💰 Budget Breakdown</h2>
+<h2 style="margin-top:15px">💰 Real Budget Breakdown</h2>
 <table>
 <tr><th>Item</th><th>Calculation</th><th>Amount</th></tr>
 <tr><td>🎟️ Tickets<br><small id="t1"></small></td><td id="t2"></td><td id="t3"></td></tr>
 <tr><td>🏨 Room<br><small id="r1"></small></td><td id="r2"></td><td id="r3"></td></tr>
 <tr><td>🍔 Food<br><small id="f1"></small></td><td id="f2"></td><td id="f3"></td></tr>
 <tr><td>🛺 Local Travel</td><td id="l2"></td><td id="l3"></td></tr>
-<tr><td>🎡 Activities / Shopping</td><td>One Time</td><td id="e3"></td></tr>
-<tr><td>🧳 Miscellaneous (10%)<br><small>Emergency, Water, Tips</small></td><td>10% of Total</td><td id="m3"></td></tr>
+<tr><td>🎡 Activities</td><td>One Time</td><td id="e3"></td></tr>
+<tr><td>🧳 Misc (10%)</td><td>Emergency</td><td id="m3"></td></tr>
 </table>
-
 <div class="total" id="totalText"></div>
 <div style="text-align:center;margin-top:8px" id="perPerson"></div>
-
 <h2 style="margin-top:15px">📊 Ekkada Ekkuva Kharcu?</h2>
 <div id="bars"></div>
-
 <h2 style="margin-top:15px">🗓️ Day-wise Plan</h2>
 <div id="planText"></div>
-
 <div class="tip" id="tipText"></div>
-
-<h2 style="margin-top:15px">💡 Money Save Tips</h2>
-<div id="saveTips"></div>
-
-<button onclick="sharePlan()">WhatsApp lo Share Chey 💬</button>
-<button onclick="savePlan()" style="background:#16A34A">Plan Save Chesuko ❤️</button>
+<div class="card" style="font-size:12px;color:#666">⚠️ Note: Ee prices approximate real market prices (IRCTC / Bus / Hotel average). Exact booking time lo konchem marochu. Final booking app lo check chesuko.</div>
+<button onclick="sharePlan()">WhatsApp Share 💬</button>
+<button onclick="savePlan()" style="background:#16A34A">Save Chesuko ❤️</button>
 <p id="savedMsg" style="text-align:center;color:green;margin-top:10px"></p>
 </div>
 
 <p class="footer">Made with ❤️ by <span>Muthyala Rakesh</span> 🇮🇳</p>
 
 <script>
-let allPlaces = [
-{ n:"Tirupati", e:"🛕", c:"south" },{ n:"Vizag", e:"🏖️", c:"south" },{ n:"Araku", e:"⛰️", c:"south" },
-{ n:"Hyderabad", e:"🏙️", c:"south" },{ n:"Ooty", e:"🌿", c:"south" },{ n:"Madurai", e:"🛕", c:"south" },
-{ n:"Chennai", e:"🏖️", c:"south" },{ n:"Pondicherry", e:"🌊", c:"south" },{ n:"Mysore", e:"👑", c:"south" },
-{ n:"Coorg", e:"☕", c:"south" },{ n:"Bangalore", e:"🏙️", c:"south" },{ n:"Kerala - Munnar", e:"🌿", c:"south" },
-{ n:"Kochi", e:"🚢", c:"south" },{ n:"Alleppey", e:"🛶", c:"south" },{ n:"Kanyakumari", e:"🌅", c:"south" },
-{ n:"Delhi", e:"🏛️", c:"north" },{ n:"Agra - Taj Mahal", e:"🕌", c:"north" },{ n:"Jaipur", e:"👑", c:"north" },
-{ n:"Udaipur", e:"🏰", c:"north" },{ n:"Manali", e:"❄️", c:"north" },{ n:"Shimla", e:"🏔️", c:"north" },
-{ n:"Kashmir", e:"🌸", c:"north" },{ n:"Leh Ladakh", e:"🏔️", c:"north" },{ n:"Varanasi", e:"🛕", c:"north" },
-{ n:"Rishikesh", e:"🧘", c:"north" },{ n:"Amritsar", e:"🙏", c:"north" },
-{ n:"Mumbai", e:"🌆", c:"west" },{ n:"Pune", e:"🏙️", c:"west" },{ n:"Goa", e:"🌊", c:"west" },
-{ n:"Ahmedabad", e:"🏙️", c:"west" },{ n:"Rann of Kutch", e:"🏜️", c:"west" },
-{ n:"Kolkata", e:"🌉", c:"east" },{ n:"Darjeeling", e:"🍵", c:"east" },{ n:"Puri", e:"🛕", c:"east" },
-{ n:"Andaman", e:"🏝️", c:"east" },{ n:"Shillong", e:"🌧️", c:"northeast" },{ n:"Guwahati", e:"🛕", c:"northeast" },
-{ n:"Gangtok", e:"🏔️", c:"northeast" },{ n:"Tawang", e:"🏔️", c:"northeast" }
-];
+// REAL DATA - Distance in KM from Anantapur approx + City wise Hotel/Food rates
+let cityData = {
+"Tirupati": {dist:200, room:1200, food:500, local:400, extra:500, emoji:"🛕", cat:"south"},
+"Vizag": {dist:550, room:1500, food:600, local:600, extra:1000, emoji:"🏖️", cat:"south"},
+"Araku": {dist:650, room:1400, food:550, local:800, extra:800, emoji:"⛰️", cat:"south"},
+"Hyderabad": {dist:350, room:1600, food:650, local:600, extra:1000, emoji:"🏙️", cat:"south"},
+"Ooty": {dist:350, room:1800, food:650, local:700, extra:1200, emoji:"🌿", cat:"south"},
+"Madurai": {dist:400, room:1100, food:450, local:400, extra:500, emoji:"🛕", cat:"south"},
+"Chennai": {dist:450, room:1700, food:650, local:600, extra:1000, emoji:"🏖️", cat:"south"},
+"Pondicherry": {dist:550, room:1800, food:700, local:500, extra:800, emoji:"🌊", cat:"south"},
+"Mysore": {dist:250, room:1400, food:550, local:500, extra:800, emoji:"👑", cat:"south"},
+"Coorg": {dist:400, room:2000, food:700, local:800, extra:1000, emoji:"☕", cat:"south"},
+"Bangalore": {dist:200, room:1800, food:700, local:700, extra:1000, emoji:"🏙️", cat:"south"},
+"Kerala - Munnar": {dist:550, room:1800, food:600, local:800, extra:1500, emoji:"🌿", cat:"south"},
+"Kochi": {dist:600, room:1600, food:600, local:600, extra:1000, emoji:"🚢", cat:"south"},
+"Alleppey": {dist:650, room:2000, food:650, local:600, extra:2500, emoji:"🛶", cat:"south"},
+"Kanyakumari": {dist:600, room:1200, food:500, local:500, extra:500, emoji:"🌅", cat:"south"},
+"Delhi": {dist:1700, room:2000, food:700, local:700, extra:1500, emoji:"🏛️", cat:"north"},
+"Agra - Taj Mahal": {dist:1500, room:1500, food:600, local:600, extra:1500, emoji:"🕌", cat:"north"},
+"Jaipur": {dist:1600, room:1700, food:650, local:700, extra:1500, emoji:"👑", cat:"north"},
+"Udaipur": {dist:1500, room:1800, food:650, local:700, extra:1200, emoji:"🏰", cat:"north"},
+"Manali": {dist:2000, room:2000, food:700, local:800, extra:2500, emoji:"❄️", cat:"north"},
+"Shimla": {dist:1900, room:1800, food:650, local:600, extra:1200, emoji:"🏔️", cat:"north"},
+"Kashmir": {dist:2400, room:2500, food:800, local:1000, extra:3500, emoji:"🌸", cat:"north"},
+"Leh Ladakh": {dist:2600, room:2500, food:900, local:1200, extra:4000, emoji:"🏔️", cat:"north"},
+"Varanasi": {dist:1400, room:1300, food:500, local:500, extra:800, emoji:"🛕", cat:"north"},
+"Rishikesh": {dist:1800, room:1400, food:550, local:500, extra:1500, emoji:"🧘", cat:"north"},
+"Amritsar": {dist:2100, room:1500, food:600, local:500, extra:800, emoji:"🙏", cat:"north"},
+"Mumbai": {dist:900, room:2500, food:800, local:800, extra:2000, emoji:"🌆", cat:"west"},
+"Pune": {dist:800, room:1800, food:700, local:600, extra:1000, emoji:"🏙️", cat:"west"},
+"Goa": {dist:650, room:2200, food:800, local:800, extra:2500, emoji:"🌊", cat:"west"},
+"Ahmedabad": {dist:1200, room:1600, food:600, local:500, extra:1000, emoji:"🏙️", cat:"west"},
+"Rann of Kutch": {dist:1300, room:1800, food:600, local:700, extra:1500, emoji:"🏜️", cat:"west"},
+"Kolkata": {dist:1500, room:1600, food:600, local:500, extra:1000, emoji:"🌉", cat:"east"},
+"Darjeeling": {dist:1800, room:1800, food:650, local:700, extra:1200, emoji:"🍵", cat:"east"},
+"Puri": {dist:1100, room:1300, food:500, local:400, extra:800, emoji:"🛕", cat:"east"},
+"Andaman": {dist:1200, room:3000, food:900, local:1000, extra:5000, emoji:"🏝️", cat:"east"},
+"Shillong": {dist:2000, room:1800, food:650, local:800, extra:1500, emoji:"🌧️", cat:"northeast"},
+"Guwahati": {dist:1900, room:1600, food:600, local:600, extra:1000, emoji:"🛕", cat:"northeast"},
+"Gangtok": {dist:2000, room:2000, food:700, local:800, extra:2000, emoji:"🏔️", cat:"northeast"},
+"Tawang": {dist:2400, room:2000, food:700, local:1000, extra:2000, emoji:"🏔️", cat:"northeast"}
+};
+
+let fromDistAdjust = {
+"Anantapur": 0, "Hyderabad": -350, "Vizag": -550, "Vijayawada": -450, "Bangalore": -200, "Chennai": -450, "Delhi": 1700, "Mumbai": 900
+};
+
 let selected = "Vizag";
 let currentFilter = "all";
 let lastTotal = 0, lastBreak = {};
 
 function renderPlaces(){
   let box = document.getElementById('places'); box.innerHTML = "";
-  let list = allPlaces.filter(p => currentFilter==="all" || p.c===currentFilter);
-  list.forEach(p=>{
+  let list = Object.keys(cityData).filter(k => currentFilter==="all" || cityData[k].cat===currentFilter);
+  list.forEach(name=>{
+    let p = cityData[name];
     let div = document.createElement('div');
-    div.className = 'place' + (p.n===selected ? ' active' : '');
-    div.innerHTML = '<span>'+p.e+'</span><b>'+p.n+'</b>';
-    div.onclick = function(){ selected = p.n; renderPlaces(); };
+    div.className = 'place' + (name===selected ? ' active' : '');
+    div.innerHTML = '<span>'+p.emoji+'</span><b>'+name+'</b>';
+    div.onclick = function(){ selected = name; renderPlaces(); autoCalc(); };
     box.appendChild(div);
   });
 }
@@ -179,13 +204,37 @@ function filterPlaces(cat, btn){
   document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active'); renderPlaces();
 }
-function updateTravelPrice(){
-  let m = document.getElementById('travelMode').value;
-  let map = {train_sleeper:500, train_ac:1200, bus:800, flight:3500, bike:1000};
-  document.getElementById('ticketPrice').value = map[m];
-}
-function updateRoomPrice(){
-  // room price already from select, no extra
+
+// KING - IDI MAIN LOGIC - ORIGINAL PRICE CALCULATE
+function autoCalc(){
+  let from = document.getElementById('fromPlace').value;
+  let mode = document.getElementById('travelMode').value;
+  let city = cityData[selected];
+  // Distance adjust - From place batti
+  let baseDist = city.dist;
+  // Rough adjust
+  if(from==="Hyderabad") baseDist = Math.max(150, city.dist - 300);
+  if(from==="Bangalore") baseDist = Math.max(150, city.dist - 150);
+  if(from==="Vizag") baseDist = Math.max(150, Math.abs(city.dist - 500));
+  if(from==="Delhi") baseDist = Math.max(200, Math.abs(city.dist - 1700));
+  if(from==="Mumbai") baseDist = Math.max(200, Math.abs(city.dist - 900));
+  if(from==="Chennai") baseDist = Math.max(150, Math.abs(city.dist - 400));
+  if(from==="Vijayawada") baseDist = Math.max(150, Math.abs(city.dist - 400));
+
+  let ticket = 0;
+  if(mode==="train_sleeper") ticket = Math.round(baseDist * 0.55 + 100); // ~ Rs.0.55 per KM + charges
+  if(mode==="train_ac") ticket = Math.round(baseDist * 1.4 + 150);
+  if(mode==="bus") ticket = Math.round(baseDist * 1.6 + 100);
+  if(mode==="flight") ticket = Math.round(1500 + baseDist * 2.2); // Base + per KM
+  if(mode==="bike") ticket = Math.round((baseDist / 40) * 105 / 2); // Petrol 105, 40kmpl, share
+
+  document.getElementById('ticketPrice').value = ticket;
+  document.getElementById('roomPrice').value = city.room;
+  document.getElementById('foodPrice').value = city.food;
+  document.getElementById('localPrice').value = city.local;
+  document.getElementById('extraPrice').value = city.extra;
+
+  document.getElementById('autoInfo').innerHTML = "📍 <b>" + from + " ➡️ " + selected + "</b> | Distance ~ " + baseDist + " KM | Train Sleeper ~ Rs." + ticket + " | Room ~ Rs." + city.room + " | Food ~ Rs." + city.food + " / Day - <b>Auto Calculate Aindi!</b>";
 }
 
 let plans = {
@@ -193,69 +242,56 @@ let plans = {
 "Goa": ["Baga Beach - Calangute","North Goa - Fort Aguada - Water Sports","South Goa - Palolem - Churches","Cruise - Casino - Night Market","Beach Sunrise - Return","Dudhsagar Falls","Shopping - Return"],
 "Delhi": ["India Gate - Red Fort - CP","Qutub Minar - Lotus Temple","Akshardham - Chandni Chowk Food","Shopping - Sarojini Nagar","Agra Day Trip - Taj Mahal","Cyber Hub","Return"],
 "Manali": ["Mall Road - Hadimba Temple","Solang Valley - Paragliding","Rohtang Pass - Snow Point","Old Manali - Cafe","Kullu - River Rafting","Jogini Falls - Trek","Return"],
-"Kashmir": ["Srinagar - Dal Lake Shikara","Gulmarg - Snow","Pahalgam - Betaab Valley","Sonmarg - Glacier","Srinagar Shopping","Doodhpathri","Return"],
-"Mumbai": ["Gateway - Marine Drive","Juhu - Bandra","Elephanta Caves","Shopping - Linking Road","Film City","Lonavala Trip","Return"]
+"Kashmir": ["Srinagar - Dal Lake Shikara","Gulmarg - Snow","Pahalgam - Betaab Valley","Sonmarg - Glacier","Srinagar Shopping","Doodhpathri","Return"]
 };
 function getPlan(place, day){
   if(plans[place] && plans[place][day]) return plans[place][day];
   return place + " Local Sightseeing - Food - Shopping - Relax";
 }
-
 function fmt(n){ return "Rs." + n.toLocaleString('en-IN'); }
 
 function makePlan(){
-  let from = document.getElementById('fromPlace').value || "Nee Place";
+  let from = document.getElementById('fromPlace').value;
   let days = parseInt(document.getElementById('days').value);
   let people = parseInt(document.getElementById('people').value) || 1;
   let ticketOne = parseInt(document.getElementById('ticketPrice').value) || 0;
-  let roomPerNight = parseInt(document.getElementById('roomType').value) || 0;
+  let roomPerNight = parseInt(document.getElementById('roomPrice').value) || 0;
   let foodPerDay = parseInt(document.getElementById('foodPrice').value) || 0;
   let localPerDay = parseInt(document.getElementById('localPrice').value) || 0;
   let extra = parseInt(document.getElementById('extraPrice').value) || 0;
   let modeText = document.getElementById('travelMode').selectedOptions[0].text;
-
   let nights = Math.max(days-1, 1);
-  // Rooms: 2 people per room
   let rooms = Math.ceil(people/2);
-
-  let ticketTotal = ticketOne * people * 2; // up + down
+  let ticketTotal = ticketOne * people * 2;
   let roomTotal = roomPerNight * nights * rooms;
   let foodTotal = foodPerDay * people * days;
   let localTotal = localPerDay * days;
   let subTotal = ticketTotal + roomTotal + foodTotal + localTotal + extra;
   let misc = Math.round(subTotal * 0.10);
   let grand = subTotal + misc;
-  lastTotal = grand;
-  lastBreak = {ticketTotal, roomTotal, foodTotal, localTotal, extra, misc};
+  lastTotal = grand; lastBreak = {ticketTotal, roomTotal, foodTotal, localTotal, extra, misc};
 
   document.getElementById('tripTitle').innerText = from + " ➡️ " + selected;
   document.getElementById('tripMeta').innerText = days + " Rojulu | " + nights + " Nights | " + people + " Mandhi | " + rooms + " Room(s) | Travel: " + modeText;
-
   let perPersonTotal = Math.round(grand / people);
-  let badge = perPersonTotal < 5000 ? "✅ BUDGET TRIP - Super!" : perPersonTotal < 15000 ? "😎 MEDIUM TRIP - Perfect!" : "👑 LUXURY TRIP - King Trip!";
-  document.getElementById('budgetBadge').innerText = badge;
+  document.getElementById('budgetBadge').innerText = perPersonTotal < 6000 ? "✅ BUDGET TRIP" : perPersonTotal < 15000 ? "😎 MEDIUM TRIP" : "👑 LUXURY TRIP";
 
   document.getElementById('t1').innerText = modeText + " - Up & Down";
   document.getElementById('t2').innerText = fmt(ticketOne) + " x " + people + " x 2";
   document.getElementById('t3').innerText = fmt(ticketTotal);
-
   document.getElementById('r1').innerText = fmt(roomPerNight) + " / Night - " + rooms + " Room(s)";
   document.getElementById('r2').innerText = fmt(roomPerNight) + " x " + nights + " Nights x " + rooms;
   document.getElementById('r3').innerText = fmt(roomTotal);
-
   document.getElementById('f1').innerText = fmt(foodPerDay) + " / Person / Day";
   document.getElementById('f2').innerText = fmt(foodPerDay) + " x " + people + " x " + days + " Days";
   document.getElementById('f3').innerText = fmt(foodTotal);
-
   document.getElementById('l2').innerText = fmt(localPerDay) + " x " + days + " Days";
   document.getElementById('l3').innerText = fmt(localTotal);
   document.getElementById('e3').innerText = fmt(extra);
   document.getElementById('m3').innerText = fmt(misc);
-
   document.getElementById('totalText').innerText = "TOTAL: " + fmt(grand);
   document.getElementById('perPerson').innerText = "Per Person: " + fmt(perPersonTotal) + " | Per Day: " + fmt(Math.round(grand/days));
 
-  // Bars
   let items = [["🎟️ Tickets",ticketTotal],["🏨 Room",roomTotal],["🍔 Food",foodTotal],["🛺 Local",localTotal],["🎡 Extra",extra],["🧳 Misc",misc]];
   let barHtml = "";
   items.forEach(it=>{
@@ -263,27 +299,18 @@ function makePlan(){
     barHtml += '<div style="font-size:13px"><b>'+it[0]+' - '+fmt(it[1])+' ('+pct+'%)</b><div class="bar"><div class="bar-fill" style="width:'+pct+'%"></div></div></div>';
   });
   document.getElementById('bars').innerHTML = barHtml;
-
   let planHtml = "";
   for(let i=0;i<days;i++) planHtml += '<div class="card"><b>Day '+(i+1)+':</b> '+getPlan(selected,i)+'</div>';
   document.getElementById('planText').innerHTML = planHtml;
-
-  document.getElementById('tipText').innerText = "💡 Tip: " + selected + " ki velle mundhu tickets munduga book chesuko. Hotel lo breakfast free untunda adugu. Local food tinte money save avuthundi.";
-  document.getElementById('saveTips').innerHTML = '<div class="card">✅ Train lo vellithe Flight kante Rs.' + (ticketOne>1000 ? "2000+ save" : "save") + ' avuthundi<br>✅ Room ni 2 sharing lo teesuko<br>✅ Food - Local hotels lo thinu<br>✅ Off-season lo vellithe Room + Tickets cheap ga vasthayi<br>✅ Group ga vellithe Cab share avuthundi</div>';
-
+  document.getElementById('tipText').innerText = "💡 Tip: " + selected + " lo Room ki Rs." + cityData[selected].room + " average. Train ticket IRCTC lo check chesuko - price almost same untundi.";
   document.getElementById('result').style.display = "block";
   document.getElementById('result').scrollIntoView({behavior:'smooth'});
 }
-function savePlan(){
-  localStorage.setItem('tripPlanFull', document.getElementById('tripTitle').innerText + " - Total " + fmt(lastTotal));
-  document.getElementById('savedMsg').innerText = "Save Aindi! Made by Muthyala Rakesh";
-}
-function sharePlan(){
-  let from = document.getElementById('fromPlace').value || "";
-  let txt = "Trip Plan: " + from + " to " + selected + " - Total " + fmt(lastTotal) + " - Tickets " + fmt(lastBreak.ticketTotal) + ", Room " + fmt(lastBreak.roomTotal) + ", Food " + fmt(lastBreak.foodTotal) + " - Made by Muthyala Rakesh";
-  window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank");
-}
+function savePlan(){ localStorage.setItem('tripPlanFull', document.getElementById('tripTitle').innerText + " - Total " + fmt(lastTotal)); document.getElementById('savedMsg').innerText = "Save Aindi! Made by Muthyala Rakesh"; }
+function sharePlan(){ let from = document.getElementById('fromPlace').value; let txt = "Trip Plan: " + from + " to " + selected + " - Total " + fmt(lastTotal) + " - Tickets " + fmt(lastBreak.ticketTotal) + ", Room " + fmt(lastBreak.roomTotal) + ", Food " + fmt(lastBreak.foodTotal) + " - Made by Muthyala Rakesh"; window.open("https://wa.me/?text=" + encodeURIComponent(txt), "_blank"); }
+
 renderPlaces();
+autoCalc();
 </script>
 </body>
-</html>4
+</html>
